@@ -1,3 +1,4 @@
+import {mountSaveManager} from './save-manager.js';
 import {mountStory} from './story.js';
 import {mountChapterResident} from './npc.js';
 import {createResearchJournal} from './research-journal.js';
@@ -70,4 +71,5 @@ mountChapterResident(chapterWorld);
 
 const fatqatNav=document.createElement("button");fatqatNav.id="fatqatGlobal";fatqatNav.textContent="FatQat 编程";fatqatNav.onclick=()=>openProgramming();document.querySelector(".topbar nav").append(fatqatNav);
 
-mountStory();
+mountStory();mountSaveManager(adventure);
+
