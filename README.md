@@ -110,7 +110,7 @@ python3 -m http.server 8000
 
 ### 《叠加远征》静态试玩版
 
-入口 `/game/`（保留末尾斜线），中英文首页导航均提供游戏链接。来源为 2026-11-01 交接包的 `public/game/`；不发布 backend、deployment、环境文件或字体源压缩包，保留字体许可证。GitHub Pages 仅托管静态文件，不运行 Node/Python。
+中英文首页的「量子小游戏 / Quantum Games」先进入 `games.html` / `games-en.html` 游戏列表，点击宣传图与介绍组成的卡片才进入 `/game/`（保留末尾斜线）。未来新游戏可在列表 `.game-grid` 中增加独立卡片，保持中英文同步；不移动现有游戏，保留浏览器存档。来源为 2026-11-01 交接包的 `public/game/`；不发布 backend、deployment、环境文件或字体源压缩包，保留字体许可证。GitHub Pages 仅托管静态文件，不运行 Node/Python。
 
 `game/deploy-config.js` 明确设置 `fatqatBaseUrl: null`：本地模拟、Python 导出和浏览器存档可用，真实 FatQat API 未部署，不与会员积分或账号云存档同步。后续完整上线需另外提供经过验收的 HTTPS 后端；不要将开发端口或本机地址填入线上配置。更新资源时同步更新配置引用版本，并保留玩家 localStorage。
 
