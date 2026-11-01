@@ -14,13 +14,28 @@ export const tours={
  'ops-photon':['欢迎来到织光工坊！跟我看光路和探测器。','光子可以携带量子信息。这里先准备相互关联的光子，再按安排测量它们。','测量会留下普通的记录。有些后续操作要看前面的记录再决定，这叫经典前馈。光路搭好后，还要验证计算结果。'],
  observatory:['一起到观测台看看吧！科学家不仅观察，还要记下结果。','一次测量只得到一个结果。准备同样的状态、重复很多次，才能比较结果出现的频率。','就像记录许多次抽卡，次数少时比例可能差很多。这里可以先试试把小灯翻转两次。']
 };
-export function guideDestination(room){return {npc:constrainPosition(room,43,60),player:constrainPosition(room,50,64)}}
+export const guideStops={
+ plaza:[[18,47,'量子游乐场'],[50,80,'星图']],
+ playroom:[[25,60,'翻转小灯'],[25,60,'翻转小灯']],
+ storage:[[21,56,'搜寻旧航海箱'],[50,56,'零件货架']],
+ chapter:[[157/6.4,195/3.6,'设备 1'],[268/6.4,195/3.6,'设备 2']],
+ observatory:[[50,56,'操作翻转装置'],[50,56,'操作翻转装置']],
+ bridge:[[20,56,'02-1'],[88,83,'纠错训练']],
+ deck:[[21.5,47,'超导量子操作室'],[39.5,47,'中性原子操作室']],
+ 'ops-sc':[[50,60,'检修与启动'],[50,60,'检修与启动'],[50,60,'检修与启动']],
+ 'ops-neutral':[[50,60,'检修与启动'],[50,60,'检修与启动']],
+ 'ops-ion':[[50,60,'点亮两颗离子星'],[50,60,'点亮两颗离子星']],
+ 'ops-photon':[[50,60,'织光成网'],[50,60,'织光成网']]
+};
+export function guideDestination(room,page=1){const stops=guideStops[room],stop=stops?.[Math.min(Math.max(page-1,0),stops.length-1)]||[50,60,''];const [x,y,label]=stop;const clamp=(x,y)=>room==='chapter'?{x:Math.max(88/6.4,Math.min(546/6.4,x)),y:Math.max(193/3.6,Math.min(326/3.6,y))}:constrainPosition(room,x,y);return {npc:clamp(x+(x<20?8:-8),y),player:clamp(x,y),label}}
 export function createRoomGuide({host,room,npc,getPlayer,walk,cancelWalk,onFinish,onGreet=()=>{},reduced}){
- let phase='approach',elapsed=0,page=0,dustAt=0;
+ let phase='approach',elapsed=0,page=0,dustAt=0,targetPage=1;
  const ui=document.createElement('section');ui.className='room-guide';ui.setAttribute('aria-label','NPC 科普导览');ui.hidden=true;const scene=host.querySelector('.adventure-scene, .scene-wrap');scene.append(ui);
  const updateNpc=(target,dt)=>{const d=distance(npc,target);if(d<.5)return true;const t=Math.min(1,9*dt/d);npc.x+=(target.x-npc.x)*t;npc.y+=(target.y-npc.y)*t;npc.button.style.left=npc.x+'%';npc.button.style.top=(npc.y-(room==='chapter'?0:4))+'%';npc.button.classList.add('guide-walking');
  if(!reduced()&&elapsed-dustAt>.15){dustAt=elapsed;const dust=document.createElement('i');dust.className='walk-dust';dust.style.left=npc.x+'%';dust.style.top=npc.y+'%';npc.button.parentElement.append(dust);setTimeout(()=>dust.remove(),300)}return false};
- function finish(){if(phase==='done')return;phase='done';npc.button.classList.remove('guide-walking');ui.remove();scene.classList.remove('scene-guide-active');cancelWalk();onFinish()}
- function render(){ui.classList.remove('sketch-paused');ui.hidden=false;scene.classList.add('scene-guide-active');ui.innerHTML=`<div class="guide-speech-copy"><strong>${residents[room].name} · ${page+1}/${tours[room].length}</strong><p role="status">${tours[room][page]}${page===tours[room].length-1&&['plaza','storage','chapter','bridge','deck','observatory'].includes(room)?' 下一步：'+npcClue(room,readNpcContext()):''}</p>${guideSketch(room,page)}<div class="guide-speech-actions"><button class="guide-next">${page===0?'好，带我看看':page===tours[room].length-1?'我来试试':'继续听'}</button> <button class="guide-skip">自由探索 / 跳过</button>${page?'<button class="guide-pause" aria-pressed="false">暂停示意</button>':''}</div></div>`;const pause=ui.querySelector('.guide-pause');if(pause)pause.hidden=reduced()||!guideSketch(room,page);if(pause)pause.onclick=()=>{const stopped=ui.classList.toggle('sketch-paused');pause.setAttribute('aria-pressed',String(stopped));pause.textContent=stopped?'播放示意':'暂停示意'};ui.querySelector('.guide-skip').onclick=finish;ui.querySelector('.guide-next').onclick=()=>{if(page===0){phase='lead';ui.hidden=true;scene.classList.remove('scene-guide-active');const goal=guideDestination(room);walk(()=>{},goal.player.x,goal.player.y)}else if(page<tours[room].length-1){page++;render()}else finish()}}
- return {cancel:finish,interruptMovement(){if(phase!=='approach')finish()},tick(dt,moving){if(phase==='done')return;elapsed+=dt;if(phase==='approach'&&elapsed>.6){const p=getPlayer();if(updateNpc(constrainPosition(room,p.x-6,p.y),dt)&&!moving){onGreet();npc.button.classList.remove('guide-walking');phase='talk';render()}}else if(phase==='lead'){const goal=guideDestination(room);const arrived=updateNpc(goal.npc,dt);if(arrived&&distance(getPlayer(),goal.player)<1){npc.button.classList.remove('guide-walking');page=1;phase='talk';render()}}}};
+ function clearTarget(){scene.querySelectorAll?.('.guide-target').forEach(b=>b.classList.remove('guide-target'))}
+ function lead(next){targetPage=next;phase='lead';ui.hidden=true;scene.classList.remove('scene-guide-active');clearTarget();const goal=guideDestination(room,next);scene.querySelectorAll?.('button[aria-label]').forEach(b=>{if(b.getAttribute('aria-label')?.includes(goal.label))b.classList.add('guide-target')});walk(()=>{},goal.player.x,goal.player.y)}
+ function finish(){if(phase==='done')return;phase='done';clearTarget();npc.button.classList.remove('guide-walking');ui.remove();scene.classList.remove('scene-guide-active');cancelWalk();onFinish()}
+ function render(){ui.classList.remove('sketch-paused');ui.hidden=false;scene.classList.add('scene-guide-active');ui.innerHTML=`<div class="guide-speech-copy"><strong>${residents[room].name} · ${page+1}/${tours[room].length}</strong><p role="status">${tours[room][page]}${page===tours[room].length-1&&['plaza','storage','chapter','bridge','deck','observatory'].includes(room)?' 下一步：'+npcClue(room,readNpcContext()):''}</p>${guideSketch(room,page)}<div class="guide-speech-actions"><button class="guide-next">${page===0?'好，带我看看':page===tours[room].length-1?'我来试试':'继续听'}</button> <button class="guide-skip">自由探索 / 跳过</button>${page?'<button class="guide-pause" aria-pressed="false">暂停示意</button>':''}</div></div>`;const pause=ui.querySelector('.guide-pause');if(pause)pause.hidden=reduced()||!guideSketch(room,page);if(pause)pause.onclick=()=>{const stopped=ui.classList.toggle('sketch-paused');pause.setAttribute('aria-pressed',String(stopped));pause.textContent=stopped?'播放示意':'暂停示意'};ui.querySelector('.guide-skip').onclick=finish;ui.querySelector('.guide-next').onclick=()=>{if(page<tours[room].length-1)lead(page+1);else finish()}}
+ return {cancel:finish,interruptMovement(){if(phase!=='approach')finish()},tick(dt,moving){if(phase==='done')return;elapsed+=dt;if(phase==='approach'&&elapsed>.6){const p=getPlayer();if(updateNpc(constrainPosition(room,p.x-6,p.y),dt)&&!moving){onGreet();npc.button.classList.remove('guide-walking');phase='talk';render()}}else if(phase==='lead'){const goal=guideDestination(room,targetPage);const arrived=updateNpc(goal.npc,dt);if(arrived&&distance(getPlayer(),goal.player)<1){npc.button.classList.remove('guide-walking');page=targetPage;phase='talk';render()}}}};
 }

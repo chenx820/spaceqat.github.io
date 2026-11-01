@@ -1,6 +1,7 @@
 // Coordinates are percentages of a 16:9 scene; constrain feet to walkable floor.
 const campaignRooms=new Set(['measurement','compiler','hardware','pulse']);
 export function constrainPosition(room,x,y){
+ if(room==='chapter')return {x:Math.max(88/6.4,Math.min(546/6.4,x)),y:Math.max(193/3.6,Math.min(326/3.6,y))};
  if(room==='voyage')return {x:Math.max(8,Math.min(92,x)),y:Math.max(39,Math.min(89,y))};
  if(campaignRooms.has(room)){x=Math.max(12,Math.min(88,x));return {x,y:Math.max(60,Math.min(Math.abs(x-50)<=6?89:80,y))};}
  const minY=room==='entry'?61:['plaza','deck'].includes(room)?47:room==='playroom'?60:['storage','observatory','bridge'].includes(room)?56:60;

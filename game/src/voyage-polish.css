@@ -50,8 +50,8 @@ body.reduced :is(.room-window-sparks i,.scene-door::after,.scene-door .interacti
 #adventure .room-guide{width:min(520px,calc(100vw - 40px))}#adventure .room-guide .guide-next{background:#6a993e!important;color:#fff4cd!important;border:2px solid #381a08;box-shadow:inset 0 3px #99c568,0 3px #35562b;text-shadow:none}#adventure .room-guide .guide-next:hover{background:#79a84d!important}
 
 /* Dialogue belongs to the world: parchment speech above the NPC, not a viewport window. */
-#adventure .adventure-scene .room-guide{position:absolute;left:2%;top:4%;right:auto;bottom:auto;width:36%;max-height:84%;padding:14px;display:block;overflow:auto;z-index:12;border:3px solid #8c5230;box-shadow:3px 3px 0 #2b1408,0 0 0 2px #d98f4e}
-#adventure .adventure-scene .room-guide[hidden]{display:none}
+:is(#adventure .adventure-scene, .scene-wrap) > .room-guide{position:absolute;left:2%;top:4%;right:auto;bottom:auto;width:36%;max-height:84%;padding:14px;display:block;overflow:auto;z-index:12;border:3px solid #8c5230;box-shadow:3px 3px 0 #2b1408,0 0 0 2px #d98f4e}
+:is(#adventure .adventure-scene, .scene-wrap) > .room-guide[hidden]{display:none}
 .guide-speech-copy>strong::before{content:'▸ ';color:#8c5230}
 .guide-speech-copy>strong{font-size:18px}.guide-speech-copy>p{line-height:1.7}
 .guide-speech-actions{display:flex;flex-wrap:wrap;gap:8px}
@@ -68,6 +68,11 @@ body.reduced :is(.room-window-sparks i,.scene-door::after,.scene-door .interacti
 .sketch-paused .guide-sketch *{animation-play-state:paused!important}
 .scene-guide-active .resident-bubble,.scene-guide-active .interaction-label{visibility:hidden!important}
 body.reduced .guide-sketch *{animation:none!important}@media(prefers-reduced-motion:reduce){.guide-sketch *{animation:none!important}}
-@media(max-width:700px){#adventure .adventure-scene .room-guide{left:3%;top:4%;width:94%;max-height:90%;padding:10px}.guide-speech-copy>strong{font-size:16px}.guide-speech-copy>p{font-size:14px;margin:5px 0}.guide-sketch svg{height:52px}.guide-sketch{margin:6px 0}.guide-speech-actions{gap:6px}}
+@media(max-width:700px){:is(#adventure .adventure-scene, .scene-wrap) > .room-guide{left:3%;top:4%;width:94%;max-height:90%;padding:10px}.guide-speech-copy>strong{font-size:16px}.guide-speech-copy>p{font-size:14px;margin:5px 0}.guide-sketch svg{height:52px}.guide-sketch{margin:6px 0}.guide-speech-actions{gap:6px}}
 
 @media(max-width:700px){.guide-speech-actions{position:sticky;bottom:0;background:#f4cfa4;padding:4px 0;flex-wrap:nowrap}#adventure .room-guide button{font-size:12px;padding:5px;white-space:nowrap}.guide-sketch small{font-size:12px}}
+
+.guide-target:after{content:'▼';position:absolute;top:-18px;left:50%;color:#ffd84d;font:24px 'Fusion Pixel',monospace;text-shadow:2px 2px #382517;pointer-events:none;animation:pixel-bob 1.2s steps(2) infinite}.scene-guide-active .guide-target .interaction-label{visibility:visible!important}
+
+
+.scene-wrap > .room-guide button{font-size:14px;line-height:1.4;padding:6px 9px}.scene-wrap > .room-guide .guide-next{background:#6a993e;color:#fff4cd}.scene-wrap > .room-guide .guide-speech-copy{min-width:0;overflow-wrap:anywhere}@media(max-width:700px){.scene-wrap > .room-guide button{font-size:12px;padding:5px;white-space:normal}.scene-wrap > .room-guide .guide-speech-actions{flex-wrap:wrap}}
