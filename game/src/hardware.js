@@ -1,0 +1,64 @@
+import {hardwareNotes as knowledge} from './chapter-knowledge.js';
+import {qatDialogue} from './qat-dialogue.js';
+import {CAMPAIGN_KEY,normalizeCampaign,saveCampaignSection} from './campaign-state.js';
+import {hardwareNames,initialHardware,pairStatus,pairProbabilities,lossProbabilities,hardwareAction,readyHardware} from './hardware-model.js';
+const goals=['依次连接任务票上的三条合法耦合边：P0–P1、P1–P3、P2–P3。','给 A、B 两个空座位装入原子，再把 A 翻成1，测量得到10。','用第二颗原子的 H 观察镜，对比有 CZ 和无 CZ 两种准备。','各观察一次 0% 与 25% 的丢失率，认清空座位和暗着的原子。'];
+
+const questions=[['有物理耦合边才可直接连接','逻辑上能相连，物理上就一定能直连'],['空座位和0态是一回事','装上原子后，才能说它处于0或1'],['这两种准备要换观察镜才能看出相位差异','ZZ柱子相同，就证明两种状态完全相同'],['座位空了，必须单独记录丢失','把丢失的座位统一记成0就行']];
+const answers=[0,1,0,0],symbols=['均存活','仅A丢失','仅B丢失','均丢失'];
+const B=(a,t,attr='')=>`<button data-hact="${a}" ${attr}>${t}</button>`;
+const tag=t=>`<span class="mp-ticket">${t}</span>`;
+const arrow='<i class="mp-arrow" aria-hidden="true">══▶</i>';
+export function atomView(value,label){return `<div class="hw-site ${value===null?'empty':value===1?'gold':value==='+'?'superposed':'blue'}"><small>${label}</small><i aria-hidden="true">${value===null?'□':'✦'}</i><b>${value===null?'空座位':value==='+'?'已准备 H':`原子 |${value}⟩`}</b></div>`}
+export function createHardware({previousComplete=()=>false,basicInstalled=()=>false,onNavigate=()=>{},storage=localStorage}={}){
+ let state=normalizeCampaign();try{state=normalizeCampaign(JSON.parse(storage.getItem(CAMPAIGN_KEY)))}catch{}
+ let index=0,tutorial=true,page=0,demo=false,selected=null,basis='ZZ',feedback='',view='',saveError=false;
+ const d=document.createElement('dialog');d.id='hardwareDialog';d.className='pixel-workshop';d.setAttribute('aria-labelledby','hardwareTitle');d.innerHTML='<header class="workbench-head"><div><h2 id="hardwareTitle"></h2></div><button id="closeHardware" aria-label="返回房间">✕</button></header><div id="hardwareBody"></div>';document.body.append(d);const body=d.querySelector('#hardwareBody');d.querySelector('#closeHardware').onclick=()=>d.close();
+ function save(){try{state=saveCampaignSection(storage,state,'hardware');saveError=false}catch{saveError=true}document.dispatchEvent(new Event('campaignprogress'))}
+ function shell(title,html){d.querySelector('#hardwareTitle').textContent=title;body.innerHTML=html+(saveError?'<p role="alert">本次进度未能保存，请保持页面打开。</p>':'');qatDialogue(d,'先看座位和连接，再让原子们一起工作。');if(!d.open)d.showModal()}
+ function open(i){if(!Number.isInteger(i)||i<0||i>3)return;if(!previousComplete()||(i>0&&!state.hardware[i-1])){shell('硬件调度台 · 尚待解锁',`<p>${!previousComplete()?'先完成编译工坊四关。':'先完成本章上一台装置。'}</p>${B('close','返回房间')}`);body.querySelector('button').onclick=()=>d.close();return}index=i;tutorial=true;page=0;demo=false;selected=null;basis='ZZ';feedback='';view='';render();d.scrollTop=0}
+ function grid(edges=[],interactive=false){return `<div class="hw-grid">${['01','02','13','23'].map(e=>`<i class="hw-edge edge-${e} ${edges.includes(e)?'lit':''}"></i>`).join('')}${[0,1,2,3].map(p=>interactive?B('port-'+p,`P${p}`,`class="hw-port port-${p} ${selected===p?'selected':''}" aria-label="端子 P${p}"`):`<span class="hw-port port-${p}">P${p}</span>`).join('')}</div>`}
+ function probabilityCards(p){return `<div class="hw-probabilities">${p.map((v,i)=>`<div>${tag(i.toString(2).padStart(2,'0'))}<div class="hw-prob-track"><i style="width:${v*100}%"></i></div><span>${(v*100).toFixed(0)}% 理论</span></div>`).join('')}</div>`}
+ function tutorialBoard(){
+  if(index===0)return `${grid(demo?['01','13','23']:[])}<p>四条铜线是本关可用的耦合边，对角线没有直连。</p>`;
+  if(index===1)return `<div class="mp-flow">${atomView(demo?1:null,'A')}${atomView(demo?0:null,'B')}</div><p>${demo?'先装两颗原子到0，再翻转A，得到10。':'方框里没有原子。空不能写成0。'}</p>`;
+  if(index===2)return `<div class="mp-flow">${atomView('+','A')}${tag(demo?'CZ 已执行':'无 CZ')}${atomView('+','B')}</div><p>观察镜：只在 B 上先做 H 再测量。</p>${probabilityCards(pairProbabilities(demo,'H1'))}<p>普通 ZZ 下，两种准备都是四项各25%，不是这里的对照图。</p>`;
+  return `<div class="mp-flow">${atomView(0,'暗着的原子')}${tag('≠')}${atomView(null,'丢失后空位')}</div><p>${demo?'若两站独立丢失率都是25%，两颗都存活的理论机会是56.25%。':'0态的原子仍在座位上，丢失是座位已经空了。'}</p>`;
+ }
+ function render(){const focus=document.activeElement?.dataset.hact;
+  if(tutorial)shell(`05-${index+1} · ${hardwareNames[index]}`,`<p>${page+1} / 3 · ${['认识装置','看一次演示','准备亲手操作'][page]}</p><p class="mp-goal">${goals[index]}</p><section class="mp-board">${tutorialBoard()}${B('demo',demo?'重看起点':'▶ 看一次变化','class="primary"')}</section><p class="mp-note">${knowledge[index]}</p><div class="mp-actions">${B('skip','跳过，进入实验')}${B('prev','上一步',page===0?'disabled':'')}${B('next',page===2?'进入实验 →':'下一步 →','class="primary"')}</div>`);
+  else{const s=state.hardwareDrafts[index];shell(`05-${index+1} · ${hardwareNames[index]}`,`<div class="mp-toolbar">${B('tutorial','▷ 重看教程')}${B('reset','重新准备')}</div><p class="mp-goal">${goals[index]}</p><section class="mp-board">${taskView(s)}${view}</section><p class="mp-feedback" role="status">${feedback||'一步一步操作装置，结果会显示在这里。'}</p>${readyHardware(index,s)?`<section class="mp-review"><h3>把发现装进日志</h3>${questions[index].map((q,i)=>B('answer-'+i,q)).join('')}</section>`:''}${state.hardware[index]?'<div class="mp-success">✔ 研究记录已保存，可以回房间探索下一台装置。</div>':''}<details><summary>想多知道一点？</summary><p>${knowledge[index]}</p><p>${['这是指定的四点方形硬件图，不代表所有超导计算机的拓扑。','本地理想模型中 RX(π) 与 X 的作用只差全局相位；输入与输出按 A B 阅读。','装载 → H0/H1 → Pair → 可选CZ → Unpair。H1观察镜只旋转B，不是XX。直接操作教学模式不等于自动中性原子编译。','本例固定输入10，每轮重新装载，A/B独立丢失。不模拟纠缠原子丢失后的状态。□表示空位，不是三能级系统的|2⟩。'][index]}</p><p>本地教学模型，没有向真实硬件或 FatQat 服务提交这些操作。</p></details>${B('close','返回房间，走向下一台装置')}`)}
+  body.querySelectorAll('[data-hact]').forEach(b=>b.onclick=()=>act(b.dataset.hact));
+  body.querySelectorAll('[data-atom-source]').forEach(b=>{b.draggable=true;b.ondragstart=e=>e.dataTransfer.setData('text/plain','atom')});
+  body.querySelectorAll('[data-atom-target]').forEach(b=>{b.ondragover=e=>e.preventDefault();b.ondrop=e=>{e.preventDefault();if(e.dataTransfer.getData('text/plain')==='atom')act('put-'+b.dataset.atomTarget)}});
+  if(focus)Array.from(body.querySelectorAll('[data-hact]')).find(b=>b.dataset.hact===focus)?.focus({preventScroll:true});
+ }
+ function taskView(s){
+  if(index===0)return `${grid(s.edges,true)}<p>先点一个端子，再点另一个端子。没有边就不能直连。</p><div class="mp-records">${['01','13','23'].map(e=>tag(`${s.edges.includes(e)?'✓':'○'} P${e[0]}–P${e[1]}`)).join('')}</div>`;
+  if(index===1)return `<div class="hw-loader" data-atom-source role="img" aria-label="可以拖动的装载原子">✦<small>拖向座位，或点击下方装载按钮</small></div><div class="hw-sites">${[0,1].map(q=>`<div data-atom-target="${q}">${atomView(s.atoms[q],q===0?'A':'B')}${B('put-'+q,`装入 ${q?'B':'A'}`)}${B('flip-'+q,`翻转 ${q?'B':'A'}`)}</div>`).join('')}</div><div class="mp-actions">${B('measure','▶ 测量两座位','class="primary"')}</div>${s.measured===null?'':`<div class="mp-flow">${tag('本次理论结果 '+s.measured)}${tag(s.measured==='10'?'✓ A亮B暗':'再调整A和B')}</div>`}`;
+  if(index===2){const p=pairStatus(s.pairing);return `<div class="hw-sites ${p.paired?'paired':''}">${[0,1].map(q=>atomView(!p.occupied[q]?null:p.prepared[q]?'+':0,q===0?'A':'B')).join('')}<i class="hw-pair-bridge" aria-hidden="true">${p.cz?'✧ 相位已改变':'配对光桥'}</i></div><div class="hw-steps">${[['PutA','装载A'],['PutB','装载B'],['H0','准备A的H'],['H1','准备B的H'],['Pair','进入配对区'],['CZ','执行CZ'],['Unpair','退出配对区']].map(([step,t])=>B('pair-'+step,t,s.pairing.includes(step)?'disabled':'')).join('')}</div><p>普通 ZZ 不直接显示这次相位改变。用右侧的 H1 观察镜比较两次准备。</p><div class="mp-actions">${B('basis-ZZ','普通 ZZ',`aria-pressed="${basis==='ZZ'}" class="${basis==='ZZ'?'selected':''}"`)}${B('basis-H1','相位观察镜 · H1',`aria-pressed="${basis==='H1'}" class="${basis==='H1'?'selected':''}"`)}${B('pairMeasure','▶ 观察这次准备','class="primary"')}</div><div class="mp-actions">${B('pairReset','重装原子，保留对照卡')}</div><div class="mp-records">${tag(`${s.records.without?'✓':'○'} 无CZ · H1观察镜`)}${tag(`${s.records.with?'✓':'○'} 有CZ · H1观察镜`)}</div>`}
+  return `<div class="mp-flow">${atomView(1,'A 重新装载后翻转')}${atomView(0,'B 重新装载')}</div><div class="mp-actions">${B('loss-0','收集64轮 · 丢失率0%','class="primary"')}${B('loss-0.25','收集64轮 · 丢失率25%','class="primary"')}</div><div class="hw-loss-comparison">${[0,.25].map(p=>s.loss[p]?lossChart(p,s.loss[p]):`<div class="hw-loss-card">${p*100}% 丢失率 · 等待观察</div>`).join('')}</div>`;
+ }
+ function lossChart(rate,record){const theory=lossProbabilities(rate);return `<article class="hw-loss-card"><h3>每站丢失率 ${rate*100}%</h3>${record.counts.map((n,i)=>`<div class="hw-loss-row"><span>${symbols[i]} ${n}/64</span><div class="mp-track" aria-label="样本 ${n/64*100}%，理论 ${theory[i]*100}%"><i style="width:${n/64*100}%"></i><b style="left:clamp(0px,calc(${theory[i]*100}% - 1px),calc(100% - 3px))"></b></div><small>理论 ${(theory[i]*100).toFixed(2)}%</small></div>`).join('')}<p>实心为样本，金线为理论。</p><div class="hw-sample-slots">${record.examples.map(s=>`<span class="${s.includes('□')?'lost':''}">${s}</span>`).join('')}</div><small>前16轮记录 · 1/0是原子读出，□是空位</small></article>`}
+ function act(a){
+  if(a==='close'){d.close();return}if(a==='demo'){demo=!demo;render();return}if(a==='prev'){page=Math.max(0,page-1);render();return}if(a==='next'&&page<2){page++;render();return}if(a==='next'||a==='skip'){tutorial=false;render();return}if(a==='tutorial'){tutorial=true;page=0;demo=false;render();return}
+  const s=state.hardwareDrafts[index];
+  if(a==='reset'){state.hardwareDrafts[index]=initialHardware();selected=null;view='';feedback='实验重新准备，已获得的关卡记录仍保留。';save();render();return}
+  if(a.startsWith('answer-')){if(!readyHardware(index,s))return;const ok=+a.slice(7)===answers[index];feedback=(ok?'✔ ':'再观察一下：')+knowledge[index];if(ok){state.hardware[index]=true;save();if(state.hardware.every(Boolean))feedback+=' 阵列定位晶体已收进背包！去中性原子操作室的航行升级槽安装。'}render();body.querySelector(`[data-hact="${a}"]`)?.classList.add(ok?'mp-correct':'mp-wrong');return}
+  if(a.startsWith('basis-')){basis=a.slice(6);view='';feedback='观察镜已更换，请重新观察。';render();return}
+  let action;
+  if(a.startsWith('port-')){const p=+a.slice(5);if(selected===null){selected=p;feedback=`已选择 P${p}，再点另一个端子。`;render();return}action={type:'edge',a:selected,b:p};selected=null}
+  if(a.startsWith('put-'))action={type:'put',target:+a.slice(4)};
+  if(a.startsWith('flip-'))action={type:'flip',target:+a.slice(5)};
+  if(a==='measure')action={type:'measure'};
+  if(a.startsWith('pair-'))action={type:'pairStep',step:a.slice(5)};
+  if(a==='pairReset')action={type:'pairReset'};
+  if(a==='pairMeasure')action={type:'pairMeasure',basis};
+  if(a.startsWith('loss-'))action={type:'loss',rate:+a.slice(5)};
+  if(!action)return;
+  try{state.hardwareDrafts[index]=hardwareAction(s,action,()=>crypto.getRandomValues(new Uint32Array(1))[0]/4294967296);view='';if(action.type==='pairMeasure'){const p=pairStatus(s.pairing);view=`<div class="hw-observation"><h3>${p.cz?'有CZ':'无CZ'} · ${basis==='ZZ'?'普通ZZ':'只在B上先做H'}</h3>${probabilityCards(pairProbabilities(p.cz,basis))}</div>`}feedback=readyHardware(index,state.hardwareDrafts[index])?'观察完成了，在下方把发现装进日志。':action.type==='pairReset'?'座位已清空，请重新装载。刚才的对照卡保留。':'操作成功，继续观察下一步。';save();render()}catch(e){feedback=e.message;render()}
+ }
+ function journal(){shell('硬件调度台 · 研究日志',state.hardware.map((done,i)=>`<article class="mp-journal"><h3>${done?'✓':'○'} 05-${i+1} ${hardwareNames[i]}</h3><p>${done?knowledge[i]:'完成对应装置后收录发现。'}</p></article>`).join(''))}
+ function upgrade(){const owned=state.hardware.every(Boolean),allowed=owned&&basicInstalled();shell('中性原子操作室 · 航行升级',`<div class="mp-upgrade"><div class="mp-chip hw-crystal upgrade-item" draggable="${allowed&&!state.arrayCrystalInstalled}" role="img" aria-label="阵列定位晶体"><img src="./assets/items/array-crystal.png" alt="" draggable="false"></div>${arrow}<button id="arrayCrystalSlot" ${allowed&&!state.arrayCrystalInstalled?'':'disabled'}>${state.arrayCrystalInstalled?'✓ 定位晶体已安装':'安装定位晶体 · 点击或拖入'}</button></div><p>${!owned?'完成硬件调度台四关后获得晶体。':!basicInstalled()?'先为本房间主机安装基础光镊阵列模块。':state.arrayCrystalInstalled?'航行升级已保存，原机器运行资格不变。':'将定位晶体拖进插槽，或直接点击插槽安装。'}</p>${B('room','前往硬件调度台')}<p>剧情模块不代表真实机器的完整物料清单。</p>`);const slot=body.querySelector('#arrayCrystalSlot'),item=body.querySelector('.hw-crystal');item.ondragstart=e=>e.dataTransfer.setData('text/plain','array-crystal');const install=()=>{if(!allowed)return;state.arrayCrystalInstalled=true;save();upgrade()};slot.onclick=install;slot.ondragover=e=>{if(allowed)e.preventDefault()};slot.ondrop=e=>{e.preventDefault();if(e.dataTransfer.getData('text/plain')==='array-crystal')install()};body.querySelector('[data-hact]').onclick=()=>{d.close();onNavigate('hardware')}}
+ return {open,journal,upgrade,get completed(){return state.hardware.filter(Boolean).length},inventory(){return `<article class="journal-card"><h3><img class="inventory-item-art" src="./assets/items/array-crystal.png" alt="" draggable="false"> 阵列定位晶体</h3><p>${state.hardware.every(Boolean)?state.arrayCrystalInstalled?'已安装到中性原子操作室':'已获得 · 去中性原子操作室安装':'硬件调度台四关完成后获得'}</p></article>`}};
+}

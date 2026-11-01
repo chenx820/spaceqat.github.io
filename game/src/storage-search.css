@@ -1,0 +1,11 @@
+.search-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:14px;background:#3d2314;border:4px solid #b87d42;box-shadow:inset 4px 4px #21130d}
+#adventurePanel .search-grid button,#expeditionDialog .search-grid button{margin:0;min-height:116px;padding:8px;background:#8c5230;border:3px solid #381a08;box-shadow:inset 3px 3px #d98f4e,inset -3px -3px #5b3118;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ffe0a1;opacity:1}
+.search-grid button:disabled{filter:none;cursor:default}.search-grid button:hover:not(:disabled){outline:2px solid #ffd84d;outline-offset:1px}.search-grid small{font:14px/1.4 'Fusion Pixel',monospace;overflow-wrap:anywhere}.search-covered{font:36px 'Fusion Pixel',monospace;color:#f1bf77;text-shadow:2px 2px #381a08}
+.search-item-art{display:block;width:64px;height:64px;image-rendering:pixelated;flex-shrink:0}.item-reward .search-item-art{width:96px;height:96px;margin:auto}.search-discovery{display:flex;gap:14px;padding:14px;margin:14px 0;background:#f4d7a8;border:3px solid #976439;min-height:100px;font-size:16px;line-height:1.7}.search-discovery p{margin:6px 0}.search-discovery strong{color:#654019}.search-count{font-size:14px}.searching{animation:search-rummage .15s steps(3) infinite}
+@keyframes search-rummage{0%,100%{translate:0 0}33%{translate:-2px 0}66%{translate:2px -2px}}
+body.reduced .searching{animation:none}@media(prefers-reduced-motion:reduce){.searching{animation:none}}
+@media(max-width:600px){.search-grid{gap:6px;padding:8px}.search-item-art{width:48px;height:48px}#adventurePanel .search-grid button,#expeditionDialog .search-grid button{min-height:98px;padding:4px}.search-grid small{font-size:12px}.search-discovery{padding:10px;gap:8px;font-size:14px}}
+
+
+
+#adventurePanel .search-grid button:disabled,#expeditionDialog .search-grid button:disabled{opacity:1!important;filter:none!important;background:#493222!important;color:#ffe0a1!important;box-shadow:inset 3px 3px #21130d!important}

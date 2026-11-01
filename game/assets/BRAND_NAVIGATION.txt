@@ -1,0 +1,7 @@
+2026-10-27
+Official logo supplied by the user, copied unchanged to assets/brand/spaceqat-logo.png. Header renders the full image with preserved aspect ratio and alt text.
+Qat pixel sprite in src/cozy-world.js references the supplied black cat, asymmetric lime eyes and open-box silhouette. Shared by the portrait, chapter scene and adventure rooms. It is a code-native sprite, not a replacement for the official logo.
+Adventure navigation now supports held WASD and arrow keys, E proximity interaction and click-to-walk. Directional input cancels click navigation. Window blur, hidden tab and open dialogs clear input. Floor bounds prevent entry into space or the rear wall; this is a walkable-region model, not per-pixel furniture collision.
+Coordinates are scene percentages with 16:9-adjusted speeds. Keyboard and click navigation share the same constraints in src/navigation.js.
+Browser verification: W to entry, E to plaza, A and Up to chapter door, E into chapter. Existing saves preserved. 12 tests pass.
+Supersedes the click-only navigation limitation in PROLOGUE_IMPLEMENTATION.txt.

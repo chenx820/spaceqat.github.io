@@ -1,0 +1,10 @@
+2026-10-27 — 分层互动教学
+
+小学入口：翻转小灯（两次操作回到起点）；星星收集瓶（机会各半不等于每批数量相等）；概率调色盘（不可能、有可能、一定）。不计分、不计时，无关卡解锁要求。低年级可由成人协助阅读。
+初中入口：使用概率、百分比、实验比较解释结果，不要求掌握振幅公式。
+进阶入口：保留 X/H/Z/RY 线路实验与相位。教程布洛赫球为纯态可视化；动画仅连接状态，不声称是实际门的物理演化路径。测量示例是指定的一种可能结果，测量后显示对应极点。
+游乐场抽样按当前纯态的 Z 基概率产生；每颗星都重新准备状态。无需持久保存分数。退出或切换小游戏会重新探索。
+实现：src/bloch.js、src/playground.js、src/playground.css；教程集成在 src/tutorial.js。
+验证：7 项测试通过，包括 RY 全范围概率一致性、相位变更与单位长度。浏览器实测翻转两次、20 次抽样、100% 金星端点和教程入口。
+教学事实参考：IBM Quantum Learning — Bits, gates, and circuits
+https://quantum.cloud.ibm.com/learning/en/courses/utility-scale-quantum-computing/bits-gates-and-circuits

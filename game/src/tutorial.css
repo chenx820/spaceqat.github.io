@@ -1,0 +1,16 @@
+.game-layout{grid-template-columns:minmax(0,1fr)}
+.world-panel{width:100%;max-width:1200px;margin:auto}
+.device-hotspots{position:absolute;inset:0;pointer-events:none}
+.device-hotspot{pointer-events:auto;position:absolute;top:27%;width:13%;height:27%;transform:translateX(-50%);background:transparent;border:0;box-shadow:none}
+.device-hotspot span{position:absolute;bottom:0;left:50%;transform:translateX(-50%);white-space:nowrap;background:#fff2d2;color:#4c5838;padding:7px 11px;border:1px solid #987342;border-radius:3px;font-size:12px;opacity:0}
+.device-hotspot:hover:not(:disabled),.device-hotspot:focus-visible{background:#fff4bd18;border:2px solid #f3e6ac}
+.device-hotspot:hover span,.device-hotspot:focus-visible span{opacity:1}
+#tutorial{width:min(780px,94vw);max-height:92vh}
+.lesson-body{padding:26px 34px}.lesson-progress{font-size:13px;letter-spacing:1px;color:#88744e}.lesson-body h3{font-size:29px;margin:18px 0 12px}.lesson-body>p{font-size:16px;line-height:1.95;color:#62573e}
+.lesson-stage{border:2px solid #c4cc9f;border-radius:8px;background:#eef0d8;padding:23px;text-align:center;min-height:220px}
+#lessonDiagram{font:clamp(20px,4vw,30px) Georgia,'Microsoft YaHei',serif;color:#4e6948;margin:12px 0 20px;min-height:38px}
+#demoCaption{font-size:15px;line-height:1.8;min-height:30px;color:#586347;margin:15px 0 0}
+#playDemo{background:#fbf6df;font-size:15px;margin-top:12px}.lesson-note{border-left:3px solid #b19c66;padding:8px 15px;background:#f2e8c9;border-radius:3px;margin-bottom:0}
+.lesson-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 30px;border-top:1px solid #d6c49c;background:#f5eacf}.lesson-footer>div{display:flex;gap:10px}.lesson-footer button{min-height:44px}#skipLesson{border-color:transparent;background:transparent;font-size:13px;color:#88775b;box-shadow:none}
+.demo-row{display:flex;align-items:center;gap:12px;margin:10px auto;max-width:410px;font-size:14px}.demo-row>span{width:58px}.demo-row>b{width:46px;text-align:right}.demo-track{height:15px;flex:1;background:#d6dabb;border-radius:3px;overflow:hidden}.demo-track i{height:100%;display:block;background:#7a9969;transition:width .6s}
+@media(max-width:600px){.lesson-body{padding:20px}.lesson-body h3{font-size:24px}.lesson-body>p{font-size:15px}.lesson-footer{padding:16px}.device-hotspot span{font-size:10px}.lesson-stage{padding:15px}}

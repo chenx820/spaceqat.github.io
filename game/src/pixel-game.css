@@ -1,0 +1,342 @@
+/* Chapter-specific interiors built on the shared pixel-workshop shell. */
+body{font-family:'Fusion Pixel','Zpix','Ark Pixel',monospace;background:#282332;color:#edc99a;image-rendering:pixelated;font-smooth:never;-webkit-font-smoothing:none}
+body :is(button,input,select,textarea,h1,h2,h3,.eyebrow,.speaker){font-family:'Fusion Pixel','Zpix','Ark Pixel',monospace}
+body :is(button,.room-object span,.dialogue,.adventure-talk,.world-panel,.topbar){border-radius:0;backdrop-filter:none;-webkit-backdrop-filter:none;transition-timing-function:steps(3,end)}
+.topbar{background:#75401f;border-bottom:4px solid #b86f35;box-shadow:0 4px #2b1408}.mission-heading,.topbar .eyebrow,.local-status{color:#f4cfa4}.official-logo{background:#f4cfa4;padding:4px}
+.adventure-heading h1,.chapter-heading h1{font-family:'Fusion Pixel',monospace;color:#ffe3a7;text-shadow:2px 2px #3a1c0d;font-size:24px}.adventure-heading .eyebrow,.adventure-help,.chapter-heading .eyebrow{color:#d8bc9b;font-size:12px}
+.adventure-scene,.world-panel{border:4px solid #7a401c;box-shadow:0 0 0 4px #d98f4e,0 0 0 8px #2b1408;border-radius:0;image-rendering:pixelated}
+.world-top,.world-footer{background:#75401f;color:#f4cfa4;border-color:#b86f35}.scene-label{background:#3d2314;border:2px solid #b86f35;border-radius:0}.scene-label strong{color:#f4cfa4}
+.adventure-talk,.dialogue{background:#f4cfa4;border:4px solid #7a401c;box-shadow:inset 0 0 0 4px #d98f4e,0 4px #2b1408;color:#4a2511;border-radius:0;padding:20px}.adventure-talk p,.dialogue p{color:#4a2511;font-size:18px;line-height:1.7}.adventure-talk strong,.speaker{color:#75401f;font-size:18px}.dialogue canvas{background:#d9b875;border:4px solid #75401f;image-rendering:pixelated}
+body :is(.adventure-tools button,.topbar button,#returnPlaza,.dialogue button,.nearby-action,.interact-button){background:#e69c55;color:#4a2511;border:2px solid #381a08;box-shadow:inset 0 4px #f7be7c,inset 0 -4px #a86024,0 4px #381a08;text-shadow:1px 1px #f7be7c;font-size:12px;border-radius:0}
+.room-object span,#roomCaption{background:#75401f;color:#ffe2ac;border:2px solid #d98f4e;box-shadow:2px 2px #2b1408;text-shadow:2px 2px #3a1c0d;border-radius:0;backdrop-filter:none;font-family:'Fusion Pixel',monospace}
+.room-object:hover span,.room-object.near span{background:#a86024;color:#fff1ca;outline:2px solid #ffe4b0}.room-object,.room-object:before,.room-object:after{transition-timing-function:steps(3,end)!important;animation-timing-function:steps(4,end)!important}
+#introFilm .film-subtitle{background:#f4cfa4;color:#4a2511;border:4px solid #7a401c;box-shadow:0 0 0 4px #d98f4e}#introFilm .film-subtitle :is(p,h2,span){font-family:'Fusion Pixel',monospace;color:#4a2511;text-shadow:1px 1px #ffe5af}#introFilm footer{background:#75401f}#introFilm .ship-art{animation-timing-function:steps(24,end)}
+/* Keep all panel bodies opaque and readable, including overlays outside lessons. */
+:is(#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop :is(.lesson-body,.play-body,.program-body,.bench-content,.info-shell){background:#f4cfa4;color:#4a2511}
+:is(#tutorial,#playground,#programmingTerminal).pixel-workshop :is(.lesson-body,.play-body,.program-body){padding:20px 24px}
+:is(#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .info-shell{padding:0}
+:is(#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop :is(#adventurePanelBody,#infoContent){padding:20px 24px}
+:is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .workbench-head{position:sticky;top:-4px;z-index:20;align-items:center}
+:is(#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop p{color:#4a2511;font-size:18px;line-height:1.7}
+:is(#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop :is(button,select,input){font-size:18px}
+:is(#tutorial,#playground).pixel-workshop .lesson-footer{display:flex;justify-content:space-between;gap:12px;background:#b86f35;border-top:4px solid #7a401c;padding:16px 24px;box-shadow:inset 0 4px #e69c55}
+:is(#tutorial,#playground).pixel-workshop .lesson-footer>div{display:flex;gap:12px}
+#tutorial.pixel-workshop .lesson-progress{color:#734323;font-size:12px}#tutorial.pixel-workshop #lessonDiagram{font-family:'Fusion Pixel',monospace;font-size:24px;color:#ffe2a2;background:#282332;border:0;text-shadow:2px 2px #191521}
+:is(#tutorial,#playground).pixel-workshop :is(.lesson-stage,.play-grid){background:#282332;border:4px solid;border-color:#191521 #625568 #625568 #191521;box-shadow:0 0 0 4px #ae6d38;padding:16px}
+:is(#tutorial,#playground).pixel-workshop :is(.lesson-stage p,.play-grid p,.play-controls label,.knob-labels,.bloch-readout){color:#e8c89e}
+:is(#tutorial,#playground).pixel-workshop :is(.sphere-note,.lesson-note){font-size:12px;line-height:1.8}
+:is(#tutorial,#playground).pixel-workshop :is(svg text,svg){font-family:'Fusion Pixel',monospace;color:#f4cfa4;fill:#f4cfa4;image-rendering:pixelated;shape-rendering:crispEdges}
+:is(#tutorial,#playground).pixel-workshop .state-arrow{stroke:#ffd86f}:is(#tutorial,#playground).pixel-workshop .state-tip{fill:#e69c55;stroke:#ffe3aa}
+#tutorial.pixel-workshop #demoBars{background:#3a303f;border:2px solid #625568}#tutorial.pixel-workshop #demoBars>div{background:#191521}#tutorial.pixel-workshop #demoBars span{color:#f4cfa4}
+#playground.pixel-workshop .play-tabs{background:#b86f35;border:0;padding:12px;gap:12px}#playground.pixel-workshop .play-tabs button[aria-pressed=true]{background:#6abe30;color:#173d21;box-shadow:inset 0 4px #99e550,inset 0 -4px #37946e,0 4px #254b27}
+#playground.pixel-workshop .little-lamp{background:#584a51;border:4px solid #191521;color:#e8c89e;box-shadow:inset 4px 4px #978079,inset -4px -4px #3b2f3b;animation:none}#playground.pixel-workshop .little-lamp.lit{background:#dcb044;border-color:#785327;color:#4a2511;box-shadow:inset 4px 4px #ffe296,inset -4px -4px #b57735}
+#playground.pixel-workshop #starJar{background:#3a303f;border:4px solid #ae6d38;box-shadow:inset 4px 4px #191521}#playground.pixel-workshop .jar-star{animation-timing-function:steps(4,end);text-shadow:2px 2px #191521}#playground.pixel-workshop .jar-star.gold{color:#ffd86f}#playground.pixel-workshop .jar-star.blue{color:#85c6de}
+/* First chapter workbench: paper notes on the left, stone apparatus on the right. */
+#workbench.pixel-workshop{width:min(1240px,calc(100vw - 48px))}#workbench.pixel-workshop .brief{background:#e8b982;border-right:4px solid #ae6d38;padding:20px}#workbench.pixel-workshop .experiment{background:#f4cfa4;padding:20px}
+#workbench.pixel-workshop :is(.brief p,.experiment p,.chart-label,.prob-label,.eyebrow,#circuitHelp,.gate-palette>span,.chart-legend,#resultStatus){color:#4a2511}
+#workbench.pixel-workshop .workbench-head .eyebrow{color:#ffe3ae}#workbench.pixel-workshop .toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:350px}#workbench.pixel-workshop .toolbar button{font-size:12px}#workbench.pixel-workshop .engine-label{display:none}
+#workbench.pixel-workshop :is(.target-card,.hint-box){background:#f4cfa4;border:2px solid #ae6d38;box-shadow:inset 2px 2px #ffe5af}#workbench.pixel-workshop :is(.target-card strong,.target-card span,.hint-box button){color:#4a2511}
+#workbench.pixel-workshop :is(.circuit,.results){background:#282332;border:4px solid;border-color:#191521 #625568 #625568 #191521;box-shadow:0 0 0 4px #ae6d38}
+#workbench.pixel-workshop :is(.results p,.results h3,.chart-label,.prob-label,.state-vector,.amplitude,.amplitude span,.chart-legend,#resultStatus){color:#edc99a}
+#workbench.pixel-workshop :is(.state-panel,.probability-panel){background:#282332;border-color:#625568}#workbench.pixel-workshop .result-message{background:#3a303f;color:#f4cfa4}
+#workbench.pixel-workshop :is(.slot,.gate-tile){background:#8c5230;border:4px solid #381a08;color:#ffe2a2;box-shadow:inset 4px 4px #d98f4e,inset -4px -4px #572d16}#workbench.pixel-workshop .slot.filled{background:#6a8144;border-color:#254b27}#workbench.pixel-workshop .slot small{color:#f4cfa4;font-size:12px}#workbench.pixel-workshop .ket,#workbench.pixel-workshop .measure-symbol{background:#584a51;color:#ffd86f;border:2px solid #978079}
+#workbench.pixel-workshop .track{background:#191521}#workbench.pixel-workshop .fill{background:#6abe30;transition-timing-function:steps(4,end)}#workbench.pixel-workshop .theory{background:#ffd86f}
+#workbench.pixel-workshop :is(.review-panel,.success-panel,#anglePanel){background:#e8b982;color:#4a2511;border:2px solid #ae6d38}#workbench.pixel-workshop :is(.review-panel p,.success-panel p){color:#4a2511}
+/* Chapter two instruments and visual lessons. */
+#expeditionDialog.pixel-workshop .bridge-work{padding:0}#expeditionDialog.pixel-workshop :is(.quantum-table,.bridge-chart>div){background:#282332;border:4px solid;border-color:#191521 #625568 #625568 #191521;box-shadow:0 0 0 2px #ae6d38}
+#expeditionDialog.pixel-workshop .table-caption,#expeditionDialog.pixel-workshop .bridge-chart strong{color:#ffe2a2}#expeditionDialog.pixel-workshop .bridge-chart span{color:#d7c2a6}#expeditionDialog.pixel-workshop .bridge-track{background:#191521}#expeditionDialog.pixel-workshop .bridge-track i{background:#6abe30}
+#expeditionDialog.pixel-workshop .bridge-circuit{background:#3a303f;color:#edc99a;border:2px solid #625568}#expeditionDialog.pixel-workshop .dock-slot{background:#8c5230;border:4px solid #381a08;box-shadow:inset 4px 4px #d98f4e,inset -4px -4px #572d16}#expeditionDialog.pixel-workshop .dock-slot.loaded{background:#6a8144;border:4px solid #254b27;box-shadow:inset 4px 4px #99b968,inset -4px -4px #395433}#expeditionDialog.pixel-workshop .dock-slot :is(b,small){color:#ffe3aa}
+#expeditionDialog.pixel-workshop .gate-dock:before,#expeditionDialog.pixel-workshop .gate-dock:after{box-shadow:none;background:#d49b58}#expeditionDialog.pixel-workshop .record-grid span{background:#e8b982;color:#4a2511;border:2px solid #ae6d38}#expeditionDialog.pixel-workshop .record-grid span.seen{background:#a9cb76;color:#254b27;border-color:#4d783e}
+#visualLesson.pixel-workshop .visual-chart{background:#3a303f;border:4px solid #191521;box-shadow:inset 2px 2px #625568;color:#edc99a}#visualLesson.pixel-workshop .visual-chart>div>div{background:#191521}#visualLesson.pixel-workshop .visual-chart i{background:#99b968;animation-timing-function:steps(4,end)}#visualLesson.pixel-workshop .visual-chart .blue{color:#85c6de}#visualLesson.pixel-workshop .visual-chart .gold{color:#ffd86f}#visualLesson.pixel-workshop .visual-chain,#visualLesson.pixel-workshop .visual-machine,#visualLesson.pixel-workshop .teaching-bulbs small{color:#edc99a}
+/* Inventory and machine artwork stay intact; only frames and controls change. */
+#expeditionDialog.pixel-workshop[data-mode=assembly] #expeditionBody{padding:0;background:#f4cfa4}#expeditionDialog.pixel-workshop .assembly-caption{background:#3d2314;border:4px solid #b86f35;text-shadow:2px 2px #191521}#expeditionDialog.pixel-workshop .assembly-caption :is(p,h3,span){color:#ffe2a2;font-size:12px}#expeditionDialog.pixel-workshop .assembly-caption h3{font-size:24px}
+#expeditionDialog.pixel-workshop .machine-field:before{background:none}#expeditionDialog.pixel-workshop .energy-orbit{display:none}#expeditionDialog.pixel-workshop .machine-socket-base{background:#584a51;border-color:#ae6d38;box-shadow:0 8px #191521;transform:translate(-50%,-50%)}
+#expeditionDialog.pixel-workshop .component-socket{background:#282332;border:4px solid #978079;box-shadow:inset 4px 4px #191521,0 4px #191521}#expeditionDialog.pixel-workshop .component-socket.mounted{background:#3a4335;border-color:#99b968;box-shadow:inset 4px 4px #254b27}#expeditionDialog.pixel-workshop .component-socket.drop-ready{border-color:#ffe3aa;outline:4px solid #fff1ca}
+#expeditionDialog.pixel-workshop .component-socket .part-art{filter:none;opacity:.3}#expeditionDialog.pixel-workshop .component-socket.mounted .part-art{opacity:1}#expeditionDialog.pixel-workshop .component-socket>span:last-child{background:#3d2314;color:#ffe2a2;border:2px solid #ae6d38;font-size:12px}
+#expeditionDialog.pixel-workshop .machine-readout{background:#282332;border:4px solid #ae6d38;box-shadow:4px 4px #191521;color:#edc99a}#expeditionDialog.pixel-workshop .machine-readout span{color:#d7c2a6}#expeditionDialog.pixel-workshop .machine-readout i{box-shadow:2px 2px #191521}
+#expeditionDialog.pixel-workshop .assembly-steps span{background:#3d2314;color:#e8b982;border:2px solid #ae6d38}#expeditionDialog.pixel-workshop .assembly-steps .ready{background:#6a8144;color:#ffe3aa;border-color:#99b968}
+#expeditionDialog.pixel-workshop .tool-tray{background:repeating-linear-gradient(0deg,#8c5230 0 20px,#75401f 20px 24px);border-color:#381a08;box-shadow:inset 0 4px #d98f4e}#expeditionDialog.pixel-workshop .tray-label{color:#ffe2a2}#expeditionDialog.pixel-workshop .tray-label small{color:#edc99a}
+#expeditionDialog.pixel-workshop .part-tile{background:#3d2314;border:4px solid #381a08;box-shadow:inset 4px 4px #a86024,inset -4px -4px #572d16}#expeditionDialog.pixel-workshop .part-tile :is(strong,small){color:#ffe2a2}#expeditionDialog.pixel-workshop .part-tile.chosen{border-color:#ffe2a2}#expeditionDialog.pixel-workshop .workshop-bottom{background:#f4cfa4}
+#expeditionDialog.pixel-workshop[data-mode=salvage] #expeditionBody{background:#f4cfa4;padding:20px}#expeditionDialog.pixel-workshop .component-card{background:#e8b982;border:4px solid #ae6d38;box-shadow:inset 4px 4px #ffe3aa}#expeditionDialog.pixel-workshop .component-card p{font-size:18px}
+/* Programming and expedition notes are still accessible in the shared shell. */
+#programmingTerminal.pixel-workshop .program-body textarea,#programmingTerminal.pixel-workshop .program-body pre{background:#282332;color:#d4e8b0;border:4px solid;border-color:#191521 #625568 #625568 #191521;font:18px/1.7 'Fusion Pixel',monospace}#programmingTerminal.pixel-workshop .program-body label{color:#4a2511}#programmingTerminal.pixel-workshop select{background:#e8b982;color:#4a2511;border:2px solid #75401f}#programmingTerminal.pixel-workshop .program-body a{color:#684820}#programmingTerminal.pixel-workshop .terminal-footnote{font-size:12px}
+:is(#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop :is(.journal-card,.item-reward){background:#e8b982;color:#4a2511;border:2px solid #ae6d38;padding:16px}.pixel-workshop .setting-row{color:#4a2511}.pixel-workshop .journal-card .eyebrow{color:#734323;text-shadow:none}
+body.reduced *{animation-duration:0s!important;transition:none!important}@media(prefers-reduced-motion:reduce){body *{animation-duration:0s!important;transition:none!important}}
+@media(max-width:700px){.adventure-talk p,.dialogue p{font-size:18px}#workbench.pixel-workshop .bench-content{display:flex;flex-direction:column}#workbench.pixel-workshop .toolbar{max-width:none}#workbench.pixel-workshop .workbench-head{flex-wrap:wrap}#workbench.pixel-workshop .brief{border-right:0;border-bottom:4px solid #ae6d38}:is(#tutorial,#playground).pixel-workshop .lesson-footer{flex-wrap:wrap}:is(#tutorial,#playground).pixel-workshop .lesson-footer>div{width:100%;justify-content:space-between}:is(#tutorial,#playground).pixel-workshop .play-grid{grid-template-columns:1fr}#expeditionDialog.pixel-workshop .assembly-caption{max-width:75%}#expeditionDialog.pixel-workshop .assembly-caption h3{font-size:18px}}
+#playground.pixel-workshop .play-grid>div{background:#282332;border:0;color:#edc99a}#playground.pixel-workshop #playFeedback,#playground.pixel-workshop .bloch-readout,#playground.pixel-workshop .sphere-note{color:#edc99a}#tutorial.pixel-workshop #demoCaption,#tutorial.pixel-workshop .bloch-readout,#tutorial.pixel-workshop .sphere-note{color:#edc99a}
+:is(#tutorial,#playground).pixel-workshop .sphere-note{color:#d7c2a6!important}#expeditionDialog.pixel-workshop .component-socket:active:not(:disabled){transform:translate(-50%,-50%) translateY(2px)}
+#workbench.pixel-workshop .brief :is(h3,h4),#workbench.pixel-workshop .review-panel h4{color:#663514;text-shadow:1px 1px #ffe5af}#workbench.pixel-workshop .results h3{color:#ffe2a2;text-shadow:2px 2px #191521}#workbench.pixel-workshop .results :is(.result-message,.state-panel p,.chart-legend){color:#edc99a;font-size:18px}#workbench.pixel-workshop .results select{background:#584a51;color:#ffe2a2;border:2px solid #978079}
+#workbench.pixel-workshop .results :is(.review-panel p,.success-panel span,.success-panel strong){color:#4a2511;text-shadow:none}
+#expeditionDialog.pixel-workshop .assembly-caption :is(h3,p,span),#expeditionDialog.pixel-workshop :is(.part-tile,.assembly-readout,.tray-label){text-shadow:2px 2px 0 #191521}
+/* Hand-built astronomical instruments and collectible display cases. */
+.pixel-orrery{display:flex;flex-direction:column;align-items:center;gap:4px}
+.pixel-orrery canvas{display:block;width:288px;height:312px;max-width:100%;object-fit:contain;image-rendering:pixelated}
+.pixel-orrery .orrery-pole{font:16px/1.6 'Fusion Pixel',monospace;color:#edc99a}
+#playground.pixel-workshop .sphere-note{font-size:16px;line-height:1.6;background:repeating-linear-gradient(0deg,#211c2b 0 4px,#252030 4px 8px);padding:12px;border:2px solid;border-color:#120e17 #463f54 #463f54 #120e17;text-shadow:none}
+:is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .qat-speech{width:fit-content;max-width:75%;box-sizing:border-box}
+:is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .qat-line{font-size:16px;line-height:1.6;text-shadow:none}
+:is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .qat-speech:before{left:-10px;top:12px;width:10px;height:14px;background:#381a08;box-shadow:none;clip-path:polygon(100% 0,100% 100%,60% 100%,60% 75%,30% 75%,30% 60%,0 60%,0 40%,30% 40%,30% 25%,60% 25%,60% 0)}
+:is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .qat-speech:after{content:'';position:absolute;left:-6px;top:16px;width:6px;height:6px;background:#f4cfa4;clip-path:polygon(100% 0,100% 100%,50% 100%,50% 75%,0 75%,0 25%,50% 25%,50% 0)}
+#playground.pixel-workshop #playActions{gap:12px}
+#playground.pixel-workshop #starJar{position:relative;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;padding:24px 12px 12px;margin-top:12px;background:#75401f;border:6px solid #381a08;box-shadow:0 0 0 3px #d98f4e,inset 0 4px #f7be7c,inset 0 -4px #a86024}
+#playground.pixel-workshop #starJar[hidden]{display:none}
+#playground.pixel-workshop #starJar:before{content:'星光收藏匣';position:absolute;top:-17px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:2px 10px;background:#d8a34c;color:#381a08;border:2px solid #381a08;box-shadow:inset 0 2px #ffe2a2,0 2px #9e6b1b;font-size:16px;line-height:1.5}
+#playground.pixel-workshop .star-slot{display:grid;place-items:center;position:relative;min-width:0;height:44px;background:#1e1926;border:2px solid;border-color:#120e17 #352d42 #352d42 #120e17;box-shadow:inset 3px 3px #120e17,inset -2px -2px #352d42}
+#playground.pixel-workshop .jar-star{position:relative;display:block;font-size:30px;line-height:36px;animation:collect-pixel-star .24s steps(2,end) both;animation-delay:calc(var(--i)*30ms)}
+#playground.pixel-workshop .jar-star:after{content:'';position:absolute;width:4px;height:4px;right:-3px;top:2px;background:#fff5d3;box-shadow:-24px 18px #f5c542;animation:collect-pixel-flash .3s steps(2,end) both;animation-delay:calc(var(--i)*30ms)}
+@keyframes collect-pixel-star{0%{opacity:0;transform:scale(0)}35%{opacity:1;transform:scale(.5) translateY(-4px)}70%{opacity:1;transform:scale(1.25)}100%{opacity:1;transform:scale(1)}}
+@keyframes collect-pixel-flash{0%,100%{opacity:0}40%,70%{opacity:1}}
+#playground.pixel-workshop .play-body details{border:0;padding-top:0}
+#playground.pixel-workshop .play-body summary{padding:10px 14px;background:#e8b982;color:#4a2511;border:2px solid #7a401c;border-bottom:4px dashed #ae6d38;box-shadow:inset 0 2px #ffe2a2;font-size:18px;transition:transform .15s steps(2,end)}
+#playground.pixel-workshop .play-body summary:hover{transform:translateX(4px)}
+#playground.pixel-workshop .play-body summary:focus-visible{outline:2px solid #381a08;outline-offset:4px}
+#playground.pixel-workshop .play-grid{position:relative}
+#playground.pixel-workshop:before,#playground.pixel-workshop:after,#playground.pixel-workshop .play-grid:before,#playground.pixel-workshop .play-grid:after{content:'';position:absolute;z-index:5;width:6px;height:6px;pointer-events:none;background:#f5c542;box-shadow:2px 2px #9e6b1b}
+#playground.pixel-workshop:before{left:8px;top:8px;z-index:30}
+#playground.pixel-workshop:after{right:8px;top:8px;z-index:30}
+#playground.pixel-workshop .play-body:before,#playground.pixel-workshop .play-body:after{content:'';position:absolute;bottom:8px;width:6px;height:6px;background:#f5c542;box-shadow:2px 2px #9e6b1b;pointer-events:none}
+#playground.pixel-workshop .play-body:before{left:8px}#playground.pixel-workshop .play-body:after{right:8px}
+#playground.pixel-workshop .play-grid:before{inset:6px; width:auto;height:auto;background:linear-gradient(#f5c542,#f5c542) left top/6px 6px no-repeat,linear-gradient(#f5c542,#f5c542) right top/6px 6px no-repeat,linear-gradient(#f5c542,#f5c542) left bottom/6px 6px no-repeat,linear-gradient(#f5c542,#f5c542) right bottom/6px 6px no-repeat;box-shadow:none}
+#playground.pixel-workshop .play-grid:after{inset:8px 4px 4px 8px;width:auto;height:auto;background:linear-gradient(#9e6b1b,#9e6b1b) left top/6px 6px no-repeat,linear-gradient(#9e6b1b,#9e6b1b) right top/6px 6px no-repeat,linear-gradient(#9e6b1b,#9e6b1b) left bottom/6px 6px no-repeat,linear-gradient(#9e6b1b,#9e6b1b) right bottom/6px 6px no-repeat;box-shadow:none;z-index:4}
+@media(max-width:620px){:is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .qat-speech{max-width:100%}.pixel-orrery canvas{width:192px;height:208px}#playground.pixel-workshop .star-slot{height:36px}}
+body.reduced #playground.pixel-workshop .jar-star{animation:none}body.reduced #playground.pixel-workshop .jar-star:after{display:none}
+@media(prefers-reduced-motion:reduce){#playground.pixel-workshop .jar-star{animation:none}#playground.pixel-workshop .jar-star:after{display:none}}
+.room-object.room-exit span{background:#f4cfa4;color:#4a2511;font-size:12px;font-weight:400;line-height:20px;letter-spacing:0;text-shadow:none;padding:8px 12px;border:2px solid #a86024;white-space:nowrap}
+.room-object.room-exit:hover span,.room-object.room-exit.near span{background:#ffe2a2;color:#4a2511;text-shadow:none}
+/* First-lesson props and guided circuit bench. */
+#tutorial.pixel-workshop[data-step='0'] .lesson-stage,#tutorial.pixel-workshop[data-step='2'] .lesson-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:32px 20px}
+#tutorial.pixel-workshop[data-step='0'] #lessonDiagram,#tutorial.pixel-workshop[data-step='2'] #lessonDiagram{width:100%;margin:0}
+#tutorial.pixel-workshop #demoCaption{width:100%;text-align:center;margin:24px 0 0;font-size:18px}
+#tutorial.pixel-workshop[data-step='0'] #demoCaption,#tutorial.pixel-workshop[data-step='2'] #demoCaption{margin:0}
+.concept-lamps{display:flex;justify-content:center;align-items:center;gap:28px}
+#tutorial.pixel-workshop .concept-core{width:64px;height:64px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#354355;border:4px solid #17212e;box-shadow:inset 4px 4px #617183,inset -4px -4px #25303e;font-size:24px;color:#b7c5d3;text-shadow:none}
+#tutorial.pixel-workshop .concept-core.sleeping i{display:block;width:16px;height:16px;background:#718393;box-shadow:0 -4px #293542,4px 4px #293542}
+#tutorial.pixel-workshop .concept-core.waiting{background:#755124;border-color:#38200e;color:#ffd84d;box-shadow:inset 4px 4px #d8a34c,inset -4px -4px #4d3015;font-size:36px;text-shadow:2px 2px #38200e}
+.concept-arrow{color:#ffd84d;animation:concept-blink 1s steps(2,end) infinite}
+@keyframes concept-blink{50%{opacity:.5}}
+#workbench.pixel-workshop #circuit{position:relative;isolation:isolate;gap:20px;padding:24px 16px 32px}
+#workbench.pixel-workshop #circuit:before{content:'';position:absolute;left:24px;right:24px;top:calc(50% - 4px);height:6px;background:#6b4c35;border-top:2px solid #2b1d12;border-bottom:2px solid #2b1d12;z-index:-1}
+#workbench.pixel-workshop #circuit.energized:after{content:'';position:absolute;top:calc(50% - 2px);left:24px;width:8px;height:4px;background:#ffd84d;box-shadow:-12px 0 #d98f4e;z-index:-1;animation:wire-charge .65s steps(12,end) both}
+@keyframes wire-charge{0%{left:24px;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:calc(100% - 32px);opacity:0}}
+#workbench.pixel-workshop #circuit :is(.slot,.ket,.measure-symbol){width:64px;height:64px;flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center;font-size:24px}
+#workbench.pixel-workshop :is(.slot.filled,.gate-tile){color:#fff;font-size:24px;font-weight:400;text-shadow:2px 2px 0 #1e4d2b}
+#workbench.pixel-workshop .slot.filled{background:#5c873d;box-shadow:inset 4px 4px #99bd65,inset -4px -4px #35552b}
+#workbench.pixel-workshop #circuit .slot small{top:calc(100% + 8px);bottom:auto;left:-8px;width:calc(100% + 16px);white-space:nowrap;line-height:1.2;text-align:center;text-shadow:none}
+#workbench.pixel-workshop .measure-symbol small{position:absolute;bottom:-24px;left:0;width:100%;font-size:12px;text-align:center;color:#edc99a;text-shadow:none}
+#workbench.pixel-workshop .pixel-meter{position:relative;width:36px;height:24px;background:#d4c69a;clip-path:polygon(0 100%,0 40%,12% 40%,12% 20%,25% 20%,25% 0,75% 0,75% 20%,88% 20%,88% 40%,100% 40%,100% 100%)}
+#workbench.pixel-workshop .pixel-meter:before{content:'';position:absolute;inset:4px 4px 0;background:#282332;clip-path:inherit}
+#workbench.pixel-workshop .pixel-meter:after{content:'';position:absolute;left:17px;bottom:2px;width:4px;height:4px;background:#ffd84d;box-shadow:4px -4px #ffd84d,8px -8px #ffd84d,-12px -4px #d4c69a,0 -16px #d4c69a}
+#workbench.pixel-workshop #predictionPanel{padding:12px;border:3px solid transparent}
+#workbench.pixel-workshop #predictionPanel h4{margin-top:0}
+#workbench.pixel-workshop.needs-prediction #predictionPanel{border:3px dashed #b4751d;animation:prediction-beacon 1.2s steps(2,end) infinite}
+@keyframes prediction-beacon{50%{border-color:#ffd84d;box-shadow:0 0 0 3px #ffd84d}}
+#workbench.pixel-workshop #predictionOptions button.selected{background:#6abe30;color:#173b20;box-shadow:inset 0 4px #37946e,inset 0 -2px #99e550,0 0 0 2px #fff;transform:translateY(2px);text-shadow:none}
+#workbench.pixel-workshop .run-row{flex-wrap:wrap}
+#workbench.pixel-workshop #predictionPrompt{width:100%;font-size:16px;line-height:1.6;color:#7a401c;font-weight:400;text-shadow:none;background:#ffe2a2;padding:8px 12px;border:2px solid #b4751d}
+#workbench.pixel-workshop #runButton:not(:disabled){background:#5ab552;box-shadow:inset 0 4px #99e550,inset 0 -4px #37946e,0 4px #381a08}
+#workbench.pixel-workshop #runButton.just-unlocked{animation:run-ready .4s steps(2,end)}
+@keyframes run-ready{50%{transform:translateY(-4px)}}
+#workbench.pixel-workshop .track{height:18px;border:2px solid;border-color:#120e17 #625568 #625568 #120e17;background:#1e1926;box-shadow:inset 2px 2px #120e17}
+#workbench.pixel-workshop .track .theory{top:-4px;height:22px;width:3px;border:0;background:#ffd84d;box-shadow:1px 0 #9e6b1b}
+#workbench.pixel-workshop .state-panel{padding:14px;background:#1e1926;border:3px solid;border-color:#120e17 #625568 #625568 #120e17;box-shadow:inset 2px 2px #120e17}
+#workbench.pixel-workshop .amplitude-badge{display:inline-block;min-width:48px;text-align:center;padding:3px 8px;background:#6b512b;color:#ffe28a;border:2px solid #ad8848;font-size:16px;text-shadow:none}
+#workbench.pixel-workshop .amplitude.negative .amplitude-badge{background:#49395f;color:#e0bafa}
+@media(max-width:600px){#workbench.pixel-workshop #circuit{gap:8px;padding-left:6px;padding-right:6px}#workbench.pixel-workshop #circuit :is(.slot,.ket,.measure-symbol){width:40px;height:48px;padding:2px;font-size:24px}#workbench.pixel-workshop .results-grid{grid-template-columns:1fr}.concept-lamps{gap:16px}}
+@media(max-width:600px){#workbench.pixel-workshop .result-heading{flex-wrap:wrap;gap:8px}#workbench.pixel-workshop #resultStatus{font-size:14px;line-height:1.6}}
+#workbench.pixel-workshop #reviewText{color:#4a2511;text-shadow:none}
+#workbench.pixel-workshop #circuit:before{left:calc(50% - 200px);right:calc(50% - 200px)}
+#workbench.pixel-workshop #circuit.energized:after{left:calc(50% - 200px)}
+@keyframes wire-charge{0%{left:calc(50% - 200px);opacity:0}10%{opacity:1}90%{opacity:1}100%{left:calc(50% + 192px);opacity:0}}
+@media(max-width:600px){#workbench.pixel-workshop #circuit:before{left:calc(50% - 116px);right:calc(50% - 116px)}#workbench.pixel-workshop #circuit.energized:after{animation-name:wire-charge-small}}
+@keyframes wire-charge-small{0%{left:calc(50% - 116px);opacity:0}10%{opacity:1}90%{opacity:1}100%{left:calc(50% + 108px);opacity:0}}
+.chapter-room-exit,.chapter-room-exit.near{font-family:'Fusion Pixel','Zpix','Ark Pixel',monospace;font-size:12px;font-weight:400;font-synthesis:none;line-height:20px;letter-spacing:0;text-shadow:none;background:#f4cfa4;color:#4a2511;border:2px solid #a86024;border-radius:0;padding:8px 12px;white-space:nowrap;box-shadow:2px 2px 0 #2b1408;-webkit-font-smoothing:none;image-rendering:pixelated}
+.chapter-room-exit:hover:not(:disabled),.chapter-room-exit:focus-visible,.chapter-room-exit.near{background:#ffe2a2;color:#4a2511;border-color:#a86024;text-shadow:none;box-shadow:2px 2px 0 #2b1408;outline:2px solid #fff1ca}
+/* Shared state-map layout: one centered column, with quiet secondary notes. */
+#tutorial.pixel-workshop[data-step='1'] .lesson-stage{display:flex;flex-direction:column;align-items:center;gap:16px;position:relative}
+#tutorial.pixel-workshop :is(#tutorialSphere,#lessonDiagram,#demoBars){width:100%;min-width:0}
+#tutorial.pixel-workshop #tutorialSphereNote{width:85%;max-width:85%;margin:0 auto;text-align:center;font-size:14px;line-height:1.7;color:#a8a2b8!important;text-wrap:pretty;float:none;align-self:center;grid-column:1/-1}
+:is(#tutorial,#playground).pixel-workshop .bloch-readout{color:#fff5df;font-size:18px;text-align:center}
+.pixel-orrery{position:relative;width:100%;max-width:420px;margin:0 auto}
+.equator-label{position:absolute;top:151px;left:calc(50% + 108px);width:94px;padding:4px;background:#211c2b;color:#a8a2b8;border:2px solid #51475e;font:12px/1.5 'Fusion Pixel',monospace;text-align:center;text-shadow:none}
+.at-equator .equator-label{color:#4deeea;border-color:#4deeea;background:#16323b;box-shadow:2px 2px #102630}
+#tutorial.pixel-workshop .gate-badges{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;margin:8px 0;text-shadow:none}
+#tutorial.pixel-workshop .state-badge{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:6px 12px;background:#26384f;color:#e1efff;border:3px solid #101a2a;box-shadow:inset 0 3px #62768f,inset 0 -3px #162334;font-size:24px;text-shadow:none}
+#tutorial.pixel-workshop .gate-badge{min-width:48px;background:#6457a2;border-color:#302343;color:#fff;box-shadow:inset 3px 3px #a69cdb,inset -3px -3px #413665;text-shadow:2px 2px #302343}
+#tutorial.pixel-workshop .superposition-badge{background:linear-gradient(90deg,#73582e 0 50%,#23545a 50% 100%);color:#fff3bd;border-color:#16343d;box-shadow:inset 0 3px #dcc37d,inset 0 -3px #183d45}
+#tutorial.pixel-workshop .badge-arrow{color:#d8b365;font-size:18px;text-shadow:none}
+#tutorial.pixel-workshop .lesson-stage{background-color:#282332;background-image:linear-gradient(#3b334a,#3b334a),linear-gradient(#3b334a,#3b334a),linear-gradient(#3b334a,#3b334a),linear-gradient(#3b334a,#3b334a),linear-gradient(#3b334a,#3b334a),linear-gradient(#3b334a,#3b334a);background-size:2px 2px;background-repeat:no-repeat;background-position:9% 24%,18% 66%,6% 83%,92% 31%,82% 63%,95% 87%}
+@media(max-width:620px){.equator-label{top:108px;left:calc(50% + 68px);width:76px;font-size:12px}#tutorial.pixel-workshop .gate-badges{gap:8px}#tutorial.pixel-workshop .state-badge{font-size:18px;padding:4px 8px}#tutorial.pixel-workshop #tutorialSphereNote{width:95%;max-width:95%}}
+#tutorial.pixel-workshop #tutorialSphere .bloch-readout,#playground.pixel-workshop #playSphere .bloch-readout{color:#fff5df;text-shadow:none}
+#tutorial.pixel-workshop #demoBars .demo-row b{color:#fff394;text-shadow:none;font-weight:400}
+#tutorial.pixel-workshop #demoBars .demo-track{background:#1e1926;border:2px solid #51475e;height:18px}
+#tutorial.pixel-workshop #demoBars .demo-track i{background:#4bacae}
+/* Neutral-atom room: quiet spatial affordances rather than collision boxes. */
+.adventure-scene .room-object,.adventure-scene .room-object:hover:not(:disabled),.adventure-scene .room-object.near,.adventure-scene .room-object:focus-visible{border:0;background:transparent;box-shadow:none;outline:none}
+.adventure-scene .room-object .interaction-label{visibility:hidden;opacity:0;pointer-events:none;bottom:0;max-width:min(320px,78vw);white-space:normal;width:max-content;text-align:center;background:#8c5230;color:#ffe2a2;font-size:12px;line-height:20px;font-weight:400;text-shadow:none;border:2px solid #381a08;box-shadow:inset 0 2px #d98f4e,2px 2px #2b1408;z-index:6;transform:translateX(-50%)}
+.adventure-scene .room-object:is(:hover,:focus-visible,.near) .interaction-label{visibility:visible;opacity:1;animation:room-sign-pop .18s steps(3,end);outline:2px solid #ffd84d}
+.adventure-scene .interaction-marker{position:absolute;left:50%;top:40%;transform:translateX(-50%);display:grid;place-items:center;width:22px;height:24px;font:24px/24px 'Fusion Pixel',monospace;font-style:normal;color:#ffd84d;text-shadow:2px 2px #3d2314;animation:marker-bob 1.2s steps(2,end) infinite;pointer-events:none}
+.adventure-scene .machine-station .interaction-marker{top:-20%}
+.adventure-scene .room-object.room-exit .interaction-marker{top:0}
+
+.adventure-scene .tech-portal .interaction-label{left:0;transform:none}
+.adventure-scene #nearbyAction,.adventure-scene #roomCaption{display:none!important}
+.adventure-scene .room-object:is(:hover,:focus-visible,.near) .interaction-marker{filter:drop-shadow(0 0 4px #ffd84d)}
+@keyframes room-sign-pop{from{translate:0 6px;opacity:0}to{translate:0 0;opacity:1}}
+@keyframes marker-bob{50%{translate:0 -4px}}
+.adventure-scene kbd,.room-key-guide kbd,#traveller .cat-key{background:#ffe6b6;color:#4a2511;border:2px solid #75401f;box-shadow:0 2px #381a08;border-radius:0;font:12px/18px 'Fusion Pixel',monospace;min-width:22px;height:auto;padding:0 3px;text-shadow:none}
+#traveller{filter:none;isolation:isolate}
+#traveller:before{content:'';position:absolute;bottom:0;left:10%;width:80%;height:6px;background:rgba(25,18,12,.55);clip-path:polygon(15% 0,85% 0,85% 20%,100% 20%,100% 80%,85% 80%,85% 100%,15% 100%,15% 80%,0 80%,0 20%,15% 20%);z-index:-1}
+#traveller .cat-key{position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);text-align:center}
+#travelCat{position:relative;image-rendering:pixelated}
+.walk-dust{position:absolute;width:2px;height:2px;background:#fff7e4;pointer-events:none;z-index:2;animation:walk-dust .3s steps(3,end) both}
+@keyframes walk-dust{to{translate:-6px -4px;opacity:0}}
+#adventure .adventure-talk{align-items:flex-start;gap:16px;padding:16px 20px;background:#f4cfa4;border:4px solid #7a401c;box-shadow:inset 0 3px #ffe6b6,0 0 0 2px #d98f4e}
+.room-portrait{flex:0 0 56px;width:56px;height:76px;background:#3d2314;border:3px solid #7a401c;box-shadow:0 0 0 2px #d98f4e;display:flex;align-items:center;flex-direction:column}
+.room-portrait canvas{width:50px;height:50px;object-fit:contain;image-rendering:pixelated;background:#d9b875}
+.room-portrait b{color:#ffe2a2;font:12px/18px 'Fusion Pixel',monospace}
+.room-dialogue-copy{flex:1;min-width:0}#adventureText{min-height:3.2em}#adventure .adventure-talk p{font-size:16px;line-height:1.6;margin:0;color:#4a2511;text-shadow:none}
+.room-key-guide{display:flex;justify-content:flex-end;gap:12px;flex-wrap:wrap;margin-top:12px;color:#75401f;font:12px/24px 'Fusion Pixel',monospace}.room-key-guide span{white-space:nowrap}
+.neutral-vfx{position:absolute;inset:0;pointer-events:none;overflow:hidden}.neutral-vfx i{position:absolute;pointer-events:none}
+.laser-mote{width:4px;height:3px;background:#76ff85;mix-blend-mode:screen;animation:laser-flow 1.6s steps(4,end) infinite;animation-delay:calc(var(--phase)*-.1s)}
+@keyframes laser-flow{0%,75%,100%{opacity:.06}25%{opacity:.7}50%{opacity:.3}}
+.atom-glimmer{width:3px;height:3px;background:#b3ff96;mix-blend-mode:screen;opacity:.06;animation:atom-flash 2s steps(2,end) infinite;animation-delay:calc(var(--phase)*-.125s)}
+@keyframes atom-flash{0%,8%{opacity:.65}9%,100%{opacity:.04}}
+.lamp-halo{width:4%;height:8%;transform:translate(-50%,-50%);background:rgba(255,180,60,.15);clip-path:polygon(25% 0,75% 0,75% 15%,100% 15%,100% 85%,75% 85%,75% 100%,25% 100%,25% 85%,0 85%,0 15%,25% 15%);animation:lamp-flicker 2.4s steps(3,end) infinite;animation-delay:calc(var(--phase)*-.4s)}
+@keyframes lamp-flicker{50%{scale:1.06;opacity:.65}}
+.machine-halo{position:absolute;inset:0;opacity:0;filter:drop-shadow(0 0 4px #ffd84d)}
+.machine-halo>div{position:absolute;inset:0;background:url('../assets/art/ops-neutral.png') center/cover;clip-path:polygon(29% 25%,43% 25%,43% 17%,47% 17%,47% 0,53% 0,53% 17%,57% 17%,57% 25%,73% 25%,73% 47%,69% 47%,69% 51%,31% 51%,31% 47%,29% 47%)}
+.room-ops-neutral:has(.machine-station:is(:hover,:focus-visible,.near)) .machine-halo{opacity:1}
+@media(max-width:700px){#adventure .adventure-talk{padding:12px;gap:12px}.room-key-guide{gap:6px;justify-content:flex-start}.adventure-scene .interaction-label kbd{display:none}.adventure-scene .machine-station .interaction-label{max-width:220px}}
+body.reduced :is(.walk-dust,.neutral-vfx){display:none}body.reduced .interaction-marker{animation:none}
+@media(prefers-reduced-motion:reduce){.walk-dust,.neutral-vfx{display:none}.interaction-marker{animation:none}}
+.adventure-scene .interaction-marker{background:#3d2314;border:2px solid #d8a34c;box-shadow:2px 2px #211a14;font-size:18px;line-height:20px;text-shadow:none}
+/* All room overlays share the same quiet interaction language. */
+#adventure .room-dialogue-copy #roomCaption{position:static;display:block;max-width:none;margin-top:6px;padding:0;border:0;background:none;box-shadow:none;text-shadow:none;color:#7a4824;font-size:12px;line-height:20px}
+#adventure .room-dialogue-copy #roomCaption:empty{display:none}
+.adventure-scene .room-object.future .interaction-label{font-size:12px}
+.adventure-scene .room-object.tech-portal .interaction-label{max-width:200px}
+.adventure-scene .room-object:focus-visible .interaction-marker{outline:2px solid #fff1ca}
+.device-hotspot,.device-hotspot:hover:not(:disabled),.device-hotspot:focus-visible,.chapter-room-exit,.chapter-room-exit.near,.chapter-room-exit:hover:not(:disabled),.chapter-room-exit:focus-visible{background:transparent;border:0;outline:none;box-shadow:none}
+.device-hotspot .interaction-marker,.chapter-room-exit .interaction-marker{position:absolute;left:50%;bottom:0;transform:translateX(-50%);display:grid;place-items:center;width:22px;height:24px;background:#3d2314;border:2px solid #d8a34c;box-shadow:2px 2px #211a14;color:#ffd84d;font:18px/20px 'Fusion Pixel',monospace;font-style:normal;pointer-events:none;animation:marker-bob 1.2s steps(2,end) infinite}
+.chapter-room-exit{width:160px;height:52px;padding:0;z-index:4}
+.chapter-room-exit .interaction-marker{bottom:28px}
+.device-hotspot .interaction-label,.chapter-room-exit .interaction-label{position:absolute;left:50%;bottom:-38px;transform:translateX(-50%);visibility:hidden;opacity:0;pointer-events:none;white-space:nowrap;font:12px/20px 'Fusion Pixel',monospace;color:#ffe2a2;background:#8c5230;border:2px solid #381a08;padding:6px 10px;box-shadow:inset 0 2px #d98f4e,2px 2px #2b1408;text-shadow:none}
+.chapter-room-exit .interaction-label{bottom:0}
+.device-hotspot:is(:hover,:focus-visible,.near) .interaction-label,.chapter-room-exit:is(:hover,:focus-visible,.near) .interaction-label{visibility:visible;opacity:1;outline:2px solid #ffd84d;animation:room-sign-pop .18s steps(3,end)}
+.device-hotspot:is(:hover,:focus-visible,.near) .interaction-marker{filter:drop-shadow(0 0 4px #ffd84d)}
+.chapter-cat-key{position:absolute;transform:translate(-50%,-100%);z-index:4;pointer-events:none;background:#ffe6b6;color:#4a2511;border:2px solid #75401f;border-radius:0;box-shadow:0 2px #381a08;font:12px/18px 'Fusion Pixel',monospace;width:22px;height:22px}
+.world-footer{display:none}
+.dialogue{align-items:flex-start;background:#f4cfa4;border:4px solid #7a401c;box-shadow:inset 0 3px #ffe6b6,0 0 0 2px #d98f4e}
+.dialogue .room-portrait{flex:0 0 56px;width:56px}
+.dialogue #qatPortrait{width:50px;height:50px;border:0}
+.dialogue #dialogueText{font-size:16px;line-height:1.6;min-height:3.2em;margin:0;color:#4a2511;text-shadow:none}
+.dialogue>div:not(.room-portrait){min-width:0}
+@media(max-width:700px){.dialogue .room-key-guide{justify-content:flex-start}.device-hotspot .interaction-label{font-size:12px;max-width:135px;white-space:normal;text-align:center}.adventure-scene .room-object .interaction-label{max-width:160px}.adventure-scene .room-object.airlock .interaction-label{max-width:180px}}
+/* Two-qubit circuits and measured statistics share one physical layout. */
+#expeditionDialog.pixel-workshop #gateDock{height:160px;min-height:160px;gap:12px;align-items:stretch}
+#expeditionDialog.pixel-workshop #gateDock:before,#expeditionDialog.pixel-workshop #gateDock:after{left:35px;right:30px;top:54px;height:4px;background:#97774e;box-shadow:0 2px #191521}
+#expeditionDialog.pixel-workshop #gateDock:after{top:110px}
+#expeditionDialog.pixel-workshop #gateDock .dock-slot{position:relative;flex:1;width:auto;min-width:0;height:160px;min-height:160px;padding:8px;overflow:visible}
+#expeditionDialog.pixel-workshop #gateDock .cx-slot{background:#283b3c;box-shadow:inset 3px 3px #597b72,inset -3px -3px #162727;border-color:#a38249}
+#expeditionDialog.pixel-workshop .cx-slot:before,#expeditionDialog.pixel-workshop .cx-slot:after{content:'';position:absolute;left:0;right:0;top:50px;height:4px;background:#718a7166}
+#expeditionDialog.pixel-workshop .cx-slot:after{top:106px}
+.cx-structure{position:absolute;inset:0;pointer-events:none}
+.cx-pillar{position:absolute;width:4px;left:calc(50% - 2px);top:52px;height:56px;background:#d8ad62;box-shadow:2px 0 #382819}
+.cx-control{position:absolute;left:calc(50% - 5px);top:47px;width:10px;height:10px;background:#fff394;box-shadow:0 0 0 2px #9e7839;clip-path:polygon(20% 0,80% 0,80% 20%,100% 20%,100% 80%,80% 80%,80% 100%,20% 100%,20% 80%,0 80%,0 20%,20% 20%)}
+.cx-target{position:absolute;left:calc(50% - 9px);top:99px;width:18px;height:18px;border:3px solid #fff394;background:#283b3c;clip-path:polygon(20% 0,80% 0,80% 20%,100% 20%,100% 80%,80% 80%,80% 100%,20% 100%,20% 80%,0 80%,0 20%,20% 20%)}
+.cx-target:before,.cx-target:after{content:'';position:absolute;background:#fff394}.cx-target:before{width:12px;height:2px;left:0;top:5px}.cx-target:after{width:2px;height:12px;top:0;left:5px}
+#expeditionDialog.pixel-workshop .cx-tag{position:absolute;left:6px;top:4px;font-size:16px;color:#fff394;text-shadow:none}
+#expeditionDialog.pixel-workshop .cx-slot small{position:absolute;bottom:6px;left:0;width:100%;margin:0;font-size:12px;color:#edc99a}
+.rail-input{position:relative;flex:0 0 86px;z-index:1;height:160px;background:#282332}
+.input-line{position:absolute;top:42px;left:0;display:flex;gap:4px;align-items:center;font-size:12px;height:28px}.input-line+ .input-line{top:98px}
+.input-line b{font-size:12px;color:#ffe2a2;font-weight:400;white-space:nowrap}
+.input-lamp{width:20px;height:20px;display:block;flex-shrink:0;background:#425064;border:3px solid #16202c;box-shadow:inset 2px 2px #718092,0 3px #8c6539;position:relative}
+.input-lamp:before{content:'';position:absolute;left:3px;right:3px;top:-7px;height:4px;border:2px solid #ac8551}
+.input-lamp.lit{background:#ffd84d;border-color:#9e6b1b;box-shadow:inset 2px 2px #fff394,0 3px #8c6539}
+.input-lamp.superposed{background:linear-gradient(90deg,#4deeea 50%,#ffd84d 50%);border-color:#9e8f58;animation:superposed-lamp 1s steps(2,end) infinite}
+.input-lamp.mixed{background:repeating-linear-gradient(90deg,#6c8194 0 4px,#bda870 4px 8px)}
+@keyframes superposed-lamp{50%{filter:brightness(1.3)}}
+.dual-detector{position:relative;flex:0 0 58px;background:#3a303f;border:3px solid #978079;z-index:1}
+.detector-dial{position:absolute;top:40px;left:10px;width:30px;height:24px;border:3px solid #c4c1a4;background:#1e1926;box-shadow:inset 0 3px #6a756a}
+.detector-dial+.detector-dial{top:96px}
+.detector-dial:after{content:'';position:absolute;left:10px;top:11px;width:3px;height:3px;background:#4deeea;box-shadow:3px -3px #4deeea,6px -6px #4deeea}
+.dual-detector small{position:absolute;bottom:3px;left:0;width:100%;text-align:center;font-size:10px;color:#edc99a}
+#expeditionDialog.pixel-workshop #bridgeDiagram{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;font-size:18px}
+.formula-capsule{padding:6px 10px;background:#554434;color:#ffe2a2;border:2px solid #ae814c;box-shadow:inset 0 2px #d8ad62}
+.formula-arrow{font-style:normal;color:#ffd84d}
+#expeditionDialog.pixel-workshop .observation-actions{gap:20px;align-items:center}
+.basis-switch{display:flex;gap:4px;flex-wrap:wrap;padding:6px;background:#3d2314;border:3px solid #7a401c}
+#expeditionDialog.pixel-workshop .basis-switch button{font-size:16px;margin:0}
+#expeditionDialog.pixel-workshop .basis-switch button.selected{background:#6450a8;color:#fff;border-color:#332353;box-shadow:inset 0 4px #382650,inset 0 -3px #b8a0ee;text-shadow:2px 2px #332353}
+#expeditionDialog.pixel-workshop #runBridge{margin-left:auto;background:#5ab552}
+#expeditionDialog.pixel-workshop .bridge-track{position:relative;height:18px;overflow:visible;background:#1e1926;border:2px solid;border-color:#120e17 #625568 #625568 #120e17;margin:14px 0}
+#expeditionDialog.pixel-workshop .bridge-track i{height:100%;display:block;background:#6abe30;box-shadow:none;transform-origin:left;animation:sample-grow .5s steps(6,end) both}
+@keyframes sample-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+#expeditionDialog.pixel-workshop .bridge-track .theory-tick{position:absolute;top:-4px;width:3px;height:22px;background:#ffd84d;box-shadow:1px 0 #9e6b1b}
+#expeditionDialog.pixel-workshop .outcome-badges{display:flex;gap:6px}
+#expeditionDialog.pixel-workshop .outcome-bit{display:inline-grid;place-items:center;width:36px;height:36px;background:#1e1926;border:2px solid #625568;font-size:24px;text-shadow:none;font-weight:400}
+#expeditionDialog.pixel-workshop .outcome-bit.cool{color:#4deeea}#expeditionDialog.pixel-workshop .outcome-bit.warm{color:#ffbd77}
+#expeditionDialog.pixel-workshop .sampling-legend{font-size:14px;color:#654323;text-shadow:none}
+#expeditionDialog.pixel-workshop #lessonFeedback.quest-success{position:relative;background:#ffe2a2;color:#4a2511;padding:16px 16px 16px 48px;border-top:4px solid #d98f4e;border-bottom:4px solid #d98f4e;box-shadow:0 -2px #7a401c,0 2px #7a401c;animation:quest-pop .4s steps(3,end);font-size:18px}
+#lessonFeedback.quest-success:before{content:'✔';position:absolute;left:14px;top:16px;color:#379446;font-size:24px;text-shadow:2px 2px #d4d998}
+@keyframes quest-pop{50%{transform:translateY(-4px)}}
+#expeditionDialog.pixel-workshop #toggleInput.next-input{animation:prediction-beacon 1.2s steps(2,end) infinite;outline:2px solid #ffd84d}
+@media(max-width:700px){#expeditionDialog.pixel-workshop .quantum-table{overflow-x:auto}#expeditionDialog.pixel-workshop #gateDock{min-width:600px}.basis-switch{width:100%}#expeditionDialog.pixel-workshop #runBridge{width:100%}}
+#expeditionDialog.pixel-workshop .input-line>span{color:#edc99a;text-shadow:none}
+#expeditionDialog.pixel-workshop .bridge-track .theory-tick{z-index:2;pointer-events:none}
+/* Paired stars: connected outcomes, with bounded two-step Bell preparation. */
+#visualLesson.pixel-workshop .star-pair{display:inline-flex;position:relative;align-items:center;gap:4px;width:92px;justify-content:center;font-style:normal;margin-right:10px;vertical-align:middle}
+#visualLesson.pixel-workshop .star-pair b{font-size:26px;line-height:32px;z-index:1;text-shadow:2px 2px #191521;animation:pair-star-twinkle 1.6s steps(2,end) infinite}
+#visualLesson.pixel-workshop .star-pair .blue{color:#7ed6ee}#visualLesson.pixel-workshop .star-pair .gold{color:#ffd84d}
+#visualLesson.pixel-workshop .pair-link{position:relative;width:26px;height:4px;background:#7ed6ee;box-shadow:0 2px #24586c;flex-shrink:0}
+#visualLesson.pixel-workshop .pair-3 .pair-link{background:#ffd84d;box-shadow:0 2px #9e6b1b}
+#visualLesson.pixel-workshop :is(.pair-1,.pair-2) .pair-link{background:repeating-linear-gradient(90deg,#7ed6ee 0 4px,transparent 4px 8px);transform:rotate(15deg);box-shadow:none}
+#visualLesson.pixel-workshop :is(.pair-1,.pair-2) .pair-link:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,#ffd84d 0 4px,transparent 4px 8px);transform:rotate(-30deg)}
+@keyframes pair-star-twinkle{50%{opacity:.7}}
+#visualLesson.pixel-workshop .visual-chart .pair-row>div>i{transform-origin:left;animation:pair-fill .6s steps(8,end) both}
+@keyframes pair-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+#visualLesson.pixel-workshop .pair-row.certain>div{position:relative;overflow:visible}
+#visualLesson.pixel-workshop .pair-row.certain>div:after{content:'';position:absolute;right:4px;top:-4px;width:3px;height:3px;background:#fff394;box-shadow:-12px 8px #7ed6ee,-24px -2px #ffd84d;animation:pair-spark .8s steps(2,end) both}
+@keyframes pair-spark{0%,100%{opacity:0}30%,70%{opacity:1}}
+#visualLesson.pixel-workshop .pair-controls{justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+.placement-controls,.playback-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.playback-controls{border-left:3px solid #ae814c;padding-left:16px;margin-left:auto}
+#visualLesson.pixel-workshop #visualAuto{background:#5ab552;animation:pair-action-glow 1.6s steps(2,end) infinite}
+@keyframes pair-action-glow{50%{outline:2px solid #b9db78;outline-offset:2px}}
+#visualLesson.pixel-workshop .visual-chain{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:14px}
+#visualLesson.pixel-workshop .chain-capsule{padding:8px 12px;background:#283b4b;color:#ffe2a2;border:3px solid #a38249;box-shadow:inset 0 3px #617d87,0 3px #191521;font-size:18px;text-shadow:none}
+#visualLesson.pixel-workshop .visual-chain>i{font-style:normal;color:#ffd84d;font-size:18px}
+#visualLesson.pixel-workshop #visualCheck{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#visualLesson.pixel-workshop #visualCheck>p{width:100%;margin:4px 0}
+#visualLesson.pixel-workshop #visualPredictionFeedback{order:0;font-size:16px}#visualLesson.pixel-workshop #visualCheck>button{order:1}
+#visualLesson.pixel-workshop .prediction-correct{background:#6abe30;color:#153921;box-shadow:inset 0 3px #99e550,0 0 0 2px #fff;text-shadow:none}
+#visualLesson.pixel-workshop .prediction-wrong{animation:prediction-shake .3s steps(4,end)}
+@keyframes prediction-shake{0%,100%{translate:0}25%,75%{translate:-4px}50%{translate:4px}}
+#visualLesson.pixel-workshop .prediction-success{color:#27582c;background:#e2edb3;padding:10px;border:2px solid #6a954c;animation:quest-pop .3s steps(3,end)}
+#visualLesson.pixel-workshop .prediction-retry{color:#7a401c;background:#ffe2a2;padding:10px}
+#expeditionDialog.pixel-workshop #lessonFeedback.bridge-notice{padding:12px 16px;background:#ffe2a2;border:3px solid #c28b36;color:#5b3318;font-size:18px;box-shadow:inset 0 2px #fff2bf}
+#expeditionDialog.pixel-workshop #undoBridge.notice-action:not(:disabled){outline:3px solid #ffd84d;outline-offset:3px;animation:prediction-beacon 1.2s steps(2,end) infinite}
+@media(max-width:650px){.playback-controls{margin-left:0;border-left:0;border-top:2px solid #ae814c;padding:12px 0 0;width:100%}#visualLesson.pixel-workshop .star-pair{width:72px;margin-right:4px}.placement-controls{width:100%}}
+#visualLesson.pixel-workshop .visual-chart .pair-row>span{width:146px;flex-shrink:0;display:flex;align-items:center;gap:4px;white-space:nowrap}
+#visualLesson.pixel-workshop .star-pair b{width:auto}
+@media(max-width:650px){#visualLesson.pixel-workshop .visual-chart .pair-row>span{width:116px}}
+
+/* Leave room for the sticky Qat header when centering a playing tutorial. */
+#tutorial.pixel-workshop #tutorialSphere{scroll-margin-top:96px}
+
+/* Compact portrait headers and keep the orrery caption inside narrow boards. */
+@media(max-width:480px){
+ :is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .workbench-head{padding:12px;gap:8px;align-items:flex-start}
+ :is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .qat-speaking{flex:1;min-width:0;padding-left:64px;min-height:68px}
+ :is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .qat-portrait-frame{width:56px;height:68px}
+ :is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .qat-portrait-frame canvas{width:48px;height:44px}
+ :is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .qat-speech{width:100%;max-width:100%;padding:6px 8px}
+ :is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .qat-line{font-size:14px;line-height:1.6}
+ :is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .qat-speaking h2{margin-left:-64px;padding-top:8px;font-size:20px;line-height:1.5}
+ :is(#visualLesson,#expeditionDialog,#tutorial,#playground,#workbench,#programmingTerminal,#adventurePanel,#infoDialog,#measurementDialog,#compilerDialog,#hardwareDialog,#pulseDialog,#finaleDialog).pixel-workshop .workbench-head>button{width:36px;min-width:36px;height:36px;padding:0;flex:none}
+ .pixel-orrery .equator-label{position:static;width:auto;max-width:100%;font-size:14px;margin:4px auto}
+ #playground.pixel-workshop .play-body{padding:12px}
+ #playground.pixel-workshop .play-grid{padding:8px;gap:20px}
+ #playground.pixel-workshop .play-grid>div:first-child{padding:4px;min-width:0}
+}
+
+

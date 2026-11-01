@@ -108,6 +108,12 @@ python3 -m http.server 8000
 
 ## 发布
 
+### 《叠加远征》静态试玩版
+
+入口 `/game/`（保留末尾斜线），中英文首页导航均提供游戏链接。来源为 2026-11-01 交接包的 `public/game/`；不发布 backend、deployment、环境文件或字体源压缩包，保留字体许可证。GitHub Pages 仅托管静态文件，不运行 Node/Python。
+
+`game/deploy-config.js` 明确设置 `fatqatBaseUrl: null`：本地模拟、Python 导出和浏览器存档可用，真实 FatQat API 未部署，不与会员积分或账号云存档同步。后续完整上线需另外提供经过验收的 HTTPS 后端；不要将开发端口或本机地址填入线上配置。更新资源时同步更新配置引用版本，并保留玩家 localStorage。
+
 继续使用仓库既有的 GitHub Pages 发布方式，保留 `.nojekyll`。在 Settings → Pages 中核对发布来源为 `main` 分支根目录。内容与静态资源提交到 `main` 后随 GitHub Pages 发布。
 
 域名相关设置以仓库当前 Settings → Pages 和 DNS 为准。更换域名时同步修改 `robots.txt`、`sitemap.xml`、两页的 canonical 与 Open Graph URL；如使用 `CNAME` 文件，也需保持一致。本次修改不更改域名配置。

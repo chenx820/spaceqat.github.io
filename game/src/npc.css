@@ -1,0 +1,40 @@
+.resident{z-index:7!important;min-width:56px;min-height:72px;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;cursor:pointer;transform:translate(-50%,-65%)}.resident canvas{width:48px;height:72px;image-rendering:pixelated;display:block;margin:auto;animation:resident-idle 1.8s steps(2) infinite}.resident-bubble{display:none;position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:#f4d3a0;border:2px solid #75451f;color:#4a2511;font:14px 'Fusion Pixel',monospace;white-space:nowrap;padding:4px}.resident:hover .resident-bubble,.resident:focus-visible .resident-bubble,.resident.near .resident-bubble{display:block}.resident-shadow{position:absolute;bottom:0;left:15%;width:70%;height:8px;background:#251c1c77;clip-path:polygon(15% 0,85% 0,85% 20%,100% 20%,100% 80%,85% 80%,85% 100%,15% 100%,15% 80%,0 80%,0 20%,15% 20%)}.chapter-resident{position:absolute;left:85%;top:72%}
+#npcDialog{width:min(660px,calc(100vw - 48px));max-height:85dvh;overflow:auto;background:#f4cfa4;border:4px solid #2b1408;border-radius:0;box-shadow:0 0 0 4px #d98f4e,0 0 0 8px #7a401c;padding:20px;color:#4a2511;font:16px/1.8 'Fusion Pixel',monospace;image-rendering:pixelated}#npcDialog::backdrop{background:#211a25cc;backdrop-filter:none}#npcDialog *{font-family:'Fusion Pixel',monospace;border-radius:0;text-shadow:none}#npcDialog header{display:flex;gap:20px;align-items:center;border-bottom:4px solid #b78046;padding-bottom:12px}#npcDialog header canvas{width:64px;height:96px;image-rendering:pixelated;border:4px solid #7a401c}#npcDialog h2{font-size:24px;color:#4a2511;margin:0}#npcDialog #npcClose{margin-left:auto}#npcDialog #npcSpeech{font-size:18px;min-height:130px;color:#4a2511}#npcDialog button{background:#e69c55;color:#432711;border:2px solid #381a08;border-top:4px solid #f7be7c;border-bottom:4px solid #a86024;min-height:44px;padding:8px 12px;font-size:16px;cursor:pointer}#npcDialog button[aria-pressed=true]{background:#9bc978}#npcDialog button:focus-visible{outline:3px solid #5ababc;outline-offset:2px}.npc-choices{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0}#npcDialog small{font-size:14px}@keyframes resident-idle{50%{transform:translateY(-2px)}}.reduced .resident canvas{animation:none}@media(prefers-reduced-motion:reduce){.resident canvas{animation:none}}@media(max-width:600px){.resident canvas{width:32px;height:48px}#npcDialog{padding:12px}.npc-choices button{width:100%}}
+/* NPCs use sprite-sized hit areas, not the tall machine hotspot geometry. */
+.room-object.resident,.chapter-resident{width:56px;height:72px;min-width:56px;min-height:72px}
+.resident .resident-bubble{top:auto;bottom:calc(100% + 8px);height:auto;width:max-content;text-shadow:none;box-shadow:2px 2px 0 #2b1408;line-height:20px;pointer-events:none}
+.resident-shadow{bottom:2px}
+@media(max-width:600px){.room-object.resident,.chapter-resident{width:44px;height:48px;min-width:44px;min-height:48px}}
+
+/* Superconducting room: quiet, local light on the cryostat interior. */
+.sc-cold-glimmer{position:absolute;inset:0;pointer-events:none;overflow:hidden;mix-blend-mode:screen}
+.sc-cold-pixel{position:absolute;width:3px;height:3px;background:#ffe4a0;opacity:.18;box-shadow:3px 0 0 #ad813a;animation:sc-cold-cycle 2s steps(4,end) infinite}
+.sc-cold-pixel.blue{background:#a5e7f2;box-shadow:0 3px 0 #548b9b}
+@keyframes sc-cold-cycle{0%,100%{opacity:.12;translate:0 0}50%{opacity:.48;translate:0 -2px}75%{opacity:.24;translate:0 0}}
+.resident.near .resident-bubble{animation:resident-dialogue-pop .18s steps(3,end) both}
+@keyframes resident-dialogue-pop{from{opacity:0;translate:0 6px}to{opacity:1;translate:0 0}}
+.room-ops-sc .resident-bubble{font-size:14px;max-width:260px;white-space:normal;width:max-content;text-align:center;border:2px solid #653617;border-top:3px solid #ffe2a2;border-bottom:3px solid #9a5b2c}
+#adventure .adventure-tools{gap:12px}
+#adventure .adventure-tools button{background:#dba064;color:#452510;border:2px solid #381a08;border-radius:0;box-shadow:inset 0 3px 0 #ffe0a0,inset 3px 0 0 #efbb7b,inset -3px 0 0 #ad682e,inset 0 -4px 0 #985321,0 0 0 2px #bf8144,3px 5px 0 #3b2112;text-shadow:none;min-height:44px;padding:10px 14px;font-family:'Fusion Pixel',monospace;transition:transform .12s steps(3,end);backdrop-filter:none}
+#adventure .adventure-tools button:hover,#adventure .adventure-tools button:focus-visible{background:#efb675;outline:2px solid #fff0c0;outline-offset:2px}
+#adventure .adventure-tools button:active{transform:translateY(2px);box-shadow:inset 0 3px 0 #ffe0a0,inset 0 -2px 0 #985321,0 0 0 2px #bf8144,2px 2px 0 #3b2112}
+.reduced .sc-cold-pixel,.reduced .resident-bubble{animation:none!important}
+@media(prefers-reduced-motion:reduce){.sc-cold-pixel,.resident.near .resident-bubble{animation:none!important}}
+@media(max-width:600px){.room-ops-sc .resident-bubble{max-width:180px;font-size:12px}}
+/* Persistent optical operation state in the room, synchronized with the workshop. */
+.neutral-vfx.is-standby .laser-mote,.neutral-vfx.is-standby .machine-halo{display:none}
+.neutral-vfx.is-running .laser-mote{width:5px;height:4px;box-shadow:4px 0 0 #9deeb2;animation:neutral-running-flow 1.6s steps(4,end) infinite;animation-delay:calc(var(--phase)*-.1s)}
+.neutral-vfx.is-running .atom-glimmer{animation-duration:2s}
+.neutral-live-monitor{position:absolute;left:56.8%;top:7.6%;width:9%;height:10.8%;background:#071e1e;box-shadow:inset 0 0 0 2px #35524c;padding:3px;z-index:2}
+.neutral-live-array{display:grid;grid-template-columns:repeat(3,1fr);width:100%;height:100%;gap:3px;padding:3px 18%}
+.neutral-live-array b{background:#132b2b;border:1px solid #28403d;min-width:0;min-height:0}
+.is-running .neutral-live-array .trap{border-color:#4ab39b;background:#1a4940}
+.is-running .neutral-live-array .occupied{background:#d6ffd1;border-color:#78e7a1;box-shadow:0 0 0 1px #70bda1;animation:neutral-readout 2s steps(2,end) infinite}
+.neutral-running-lights{position:absolute;left:32.3%;top:15.9%;display:flex;gap:3px}.neutral-running-lights b{width:4px;height:3px;background:#b6ff91;animation:neutral-readout 1.2s steps(3,end) infinite}.neutral-running-lights b:nth-child(2){animation-delay:-.4s}.neutral-running-lights b:nth-child(3){animation-delay:-.8s}
+@keyframes neutral-running-flow{0%,100%{opacity:.18;translate:0 0}25%{opacity:.8;translate:3px 0}50%{opacity:.4;translate:0 0}75%{opacity:.2;translate:0 0}}
+@keyframes neutral-readout{50%{opacity:.55}}
+body.reduced .neutral-vfx{display:block}body.reduced .neutral-vfx *{animation:none!important}body.reduced .neutral-vfx .laser-mote{opacity:.4}
+@media(prefers-reduced-motion:reduce){.neutral-vfx{display:block}.neutral-vfx *{animation:none!important}.neutral-vfx .laser-mote{opacity:.4}}
+.sc-cold-idle .sc-cold-pixel{animation:none;opacity:.05}.sc-cold-online .sc-cold-pixel{opacity:.4}
+/* Silhouettes share their portrait art; no permanent names or gender labels. */
+.resident[data-species=jelly] canvas{animation:resident-float 2.4s steps(3,end) infinite}.resident[data-species=rock] canvas{animation-duration:3s}.resident[data-species=antenna] canvas{animation-delay:-.6s}.resident[data-species=fin] canvas{animation-delay:-1s}@keyframes resident-float{0%,100%{transform:translateY(-2px)}50%{transform:translateY(-6px)}}.reduced .resident[data-species] canvas{animation:none}@media(prefers-reduced-motion:reduce){.resident[data-species] canvas{animation:none}}#npcDialog header canvas{flex-shrink:0;object-fit:contain}

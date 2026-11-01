@@ -1,0 +1,13 @@
+import {createRoomGuide} from './room-guides.js';
+import {residents,npcClue,readNpcContext} from './npc-model.js';
+import {chapterResident} from './chapter-interaction.js';
+export {paintResident as drawResident} from './npc-art.js';
+import {paintResident as drawResident,appearances} from './npc-art.js';
+let dialogue;
+export function speakToResident(room){const n=residents[room];if(!n)return;if(!dialogue){dialogue=document.createElement('dialog');dialogue.id='npcDialog';dialogue.setAttribute('aria-labelledby','npcName');document.body.append(dialogue);}
+ dialogue.innerHTML=`<header><canvas width="32" height="48" role="img" aria-label="${n.name}：${appearances[room].detail}"></canvas><div><small>${n.role}</small><h2 id="npcName">${n.name}</h2></div><button id="npcClose" aria-label="结束对话">✕</button></header><p id="npcSpeech" role="status"></p><div class="npc-choices"><button data-topic="intro">认识一下</button><button data-topic="fact">介绍这个房间</button><button data-topic="clue">给我一个有效线索</button></div><small>线索随当前进度更新，不会自动领取物品或替你完成实验。</small>`;
+ drawResident(dialogue.querySelector('canvas'),room,true);const text=dialogue.querySelector('#npcSpeech');text.textContent=n.intro;dialogue.querySelector('#npcClose').onclick=()=>dialogue.close();dialogue.querySelectorAll('[data-topic]').forEach(b=>b.onclick=()=>{text.textContent=b.dataset.topic==='clue'?npcClue(room,readNpcContext()):n[b.dataset.topic];dialogue.querySelectorAll('[data-topic]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});if(!dialogue.open)dialogue.showModal();}
+export function decorateResident(button,room){const n=residents[room];button.classList.add('resident');button.dataset.species=appearances[room].kind||'human';button.addEventListener('keydown',e=>{if(e.key.toLowerCase()==='e'){e.preventDefault();e.stopPropagation();button.click()}});button.setAttribute('aria-label',`与 ${n.name} 对话`);button.innerHTML=`<i class="resident-shadow"></i><canvas width="32" height="48" aria-hidden="true"></canvas><div class="resident-bubble"><kbd>E</kbd> ${room==='ops-sc'?'对话：了解稀释制冷机状态':'交谈'}</div>`;drawResident(button.querySelector('canvas'),room);}
+export function mountChapterResident(world){const area=document.querySelector('.scene-wrap');if(!area||area.querySelector('.chapter-resident'))return;const b=document.createElement('button');b.className='chapter-resident';decorateResident(b,'chapter');b.style.left=chapterResident.x/640*100+'%';b.style.top=chapterResident.y/360*100+'%';b.style.transform='translate(-50%,-100%)';area.append(b);const point={x:chapterResident.x/6.4,y:chapterResident.y/3.6,button:b};world.registerResident(b,()=>speakToResident('chapter'),options=>createRoomGuide({...options,host:{querySelector:()=>area},room:'chapter',npc:point}),point);}
+
+

@@ -1,0 +1,7 @@
+// Navigation gallery: door anchors match voyage-gallery-v1.png; feet stop at y=39.
+export const voyageStops=[['03 测量港','measurement','测量把一次结果变成记录；重复实验才能比较概率。'],['04 编译工坊','compiler','编译可以换一种线路表达，同时保留目标计算的结果。'],['05 硬件调度台','hardware','逻辑线路需要映射到真实硬件；没有连接的座位不能直接执行双比特门。'],['06 脉冲核心','pulse','门操作由控制信号实现；持续时间和噪声都会影响实验结果。']];
+export const voyageDoorX=[23,40,60,77];
+export function voyageArt(){
+ const stars=Array.from({length:50},(_,i)=>`<rect x="${(i*47)%344}" y="${(i*13)%32}" width="${i%4?1:2}" height="1" fill="${i%3?'#a8b8d3':'#ffe4a2'}"/>`).join('');
+ return `<svg class="voyage-sky" viewBox="0 0 320 180" shape-rendering="crispEdges" aria-hidden="true"><defs><clipPath id="voyageWindows"><path d="M45 1h67v16H65v4H45zM116 1h68v15h-68zM197 1h76v17h-76z"/></clipPath></defs><g clip-path="url(#voyageWindows)"><g class="voyage-drift"><path d="M48 8h25v3h12v3h-38v-3h-8V8zM215 12h18v3h22v3h-32v-2h-8z" fill="#7968a1" opacity=".18"/>${stars}<path d="M167 7h4v2h2v3h-5v-2h-2zM253 18h3v1h2v3h-5z" fill="#8593ab" opacity=".55"/></g></g></svg><div class="voyage-runes" aria-hidden="true">${[[36,57],[43,72],[57,72],[64,57],[50,52],[50,75]].map(([x,y],i)=>`<i style="left:${x}%;top:${y}%;animation-delay:-${i*.4}s"></i>`).join('')}</div><div class="voyage-torches" aria-hidden="true">${[[2,26],[12,14],[88,14],[98,26],[22,79],[78,79]].map(([x,y],i)=>`<i style="left:${x}%;top:${y}%;animation-delay:-${i*.13}s"></i>`).join('')}</div>`;
+}
