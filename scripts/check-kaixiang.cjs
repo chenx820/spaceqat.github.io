@@ -8,7 +8,7 @@ const fs=require('node:fs'),http=require('node:http'),assert=require('node:asser
   page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>r.abort());
   await page.addInitScript(()=>{window.drawnText=[];const draw=CanvasRenderingContext2D.prototype.fillText;CanvasRenderingContext2D.prototype.fillText=function(text,...args){if(!window.drawnText.includes(text))window.drawnText.push(text);return draw.call(this,text,...args)}});
   await page.goto('http://127.0.0.1:'+server.address().port);await page.waitForTimeout(800);
-  assert.match(await page.title(),/太空猫猫杀/);assert.ok((await page.evaluate(()=>drawnText)).some(t=>t.includes('登船短训练')));
+  assert.match(await page.title(),/太空量子猫猫局/);assert.ok((await page.evaluate(()=>drawnText)).some(t=>t.includes('登船短训练')));
   await page.mouse.click(1200,53);await page.waitForTimeout(400);
   assert.ok((await page.evaluate(()=>drawnText)).includes('开始航行'));
   await page.screenshot({path:os.tmpdir()+'/kaixiang-menu.png'});
