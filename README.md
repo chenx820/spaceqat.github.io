@@ -118,6 +118,14 @@ python3 -m http.server 8000
 
 域名相关设置以仓库当前 Settings → Pages 和 DNS 为准。更换域名时同步修改 `robots.txt`、`sitemap.xml`、两页的 canonical 与 Open Graph URL；如使用 `CNAME` 文件，也需保持一致。本次修改不更改域名配置。
 
+### 《开箱：太空猫猫杀》静态试玩版
+
+访问 `/kaixiang/`，中英文游戏列表均有独立卡片。来源：`spaceqat-kaixiang-2026-11-02.zip` 中的 `kaixiang.html`，发布为 `kaixiang/index.html`；添加 UTF-8、移动端 viewport 和网页标题。游戏内原有画布标题保留交付版本。宣传图为实际游戏菜单截图。
+
+遵循交付说明第七节，仅上线单机与训练。GitHub Pages 不能运行多人房间服务，卡片已标注联机暂未开放。不要上传完整 ZIP、`server.mjs`、systemd 或 Nginx 配置。后续多人版需要另行部署 Node 服务与 HTTPS/WebSocket，完成双客户端验收后再更新入口。现有 `/game/` 和其存档不受影响。
+
+检查：`node scripts/check-kaixiang.cjs` 与 `node scripts/check-game-deployment.cjs`（需要 Playwright / Edge）。
+
 ## 技术口径
 
 SpaceQat 社区定位 → 活动与交流 → 开源工具 FatQat → 开放基座 → 参与方式 → 共建伙伴。保留协作者的社区介绍与 FatQat 技术表述。
