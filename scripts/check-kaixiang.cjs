@@ -12,6 +12,10 @@ const fs=require('node:fs'),http=require('node:http'),assert=require('node:asser
   await page.mouse.click(1200,53);await page.waitForTimeout(400);
   assert.ok((await page.evaluate(()=>drawnText)).includes('开始航行'));
   await page.screenshot({path:os.tmpdir()+'/kaixiang-menu.png'});
+  await page.evaluate(()=>{drawnText=[]});await page.mouse.click(665,360);await page.waitForTimeout(300);
+  assert.ok(!(await page.evaluate(()=>drawnText.join(' '))).includes('Claude'),'Obsolete preview notice removed');
+  await page.screenshot({path:os.tmpdir()+'/kaixiang-network.png'});
+  await page.mouse.click(540,360);await page.waitForTimeout(200);
   await page.mouse.click(590,510);await page.evaluate(()=>{drawnText=[]});await page.mouse.click(580,760);await page.waitForTimeout(800);
   assert.ok((await page.evaluate(()=>drawnText)).length>10,'Solo game renders');
   await page.keyboard.press('d');await page.screenshot({path:os.tmpdir()+'/kaixiang-solo.png'});
